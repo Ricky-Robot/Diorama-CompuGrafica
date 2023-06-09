@@ -1,0 +1,8 @@
+﻿################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/Proyecto_Final
+/.vs/ProyectoFinal/v17
+/Debug
+/Proyecto_Final/Debug

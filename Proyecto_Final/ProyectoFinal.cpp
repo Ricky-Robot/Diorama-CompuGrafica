@@ -1,9 +1,6 @@
 ﻿/*
+* PROYECTO FINAL: DIORAMA
 Semestre 2023-2
-Nombres: 
-Arroyo Quiroz José Miguel
-Hernández Hernández Cristian
-Proyecto Final: Diorama de la Vida Cotidiana (Lucario y Mordecai)
 */
 //para cargar imagen
 #define STB_IMAGE_IMPLEMENTATION
