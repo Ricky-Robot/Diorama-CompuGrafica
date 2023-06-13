@@ -60,6 +60,8 @@ int Window::Initialise()
 	//MANEJAR TECLADO y MOUSE
 	createCallbacks();
 
+	glfwSetInputMode(mainWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
 
 	//permitir nuevas extensiones
 	glewExperimental = GL_TRUE;
