@@ -1,5 +1,6 @@
 #include "Window.h"
 
+
 Window::Window()
 {
 	width = 800;
@@ -14,7 +15,11 @@ Window::Window(GLint windowWidth, GLint windowHeight)
 	width = windowWidth;
 	height = windowHeight;
 	muevex = 2.0f;
+	posX = 0.0f;
+	posZ = 0.0f;
+	escale = 0.0f;
 	BanOnAnim = false;
+	Imp = false;
 	luz = false;
 	for (size_t i = 0; i < 1024; i++)
 	{
@@ -130,6 +135,35 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 	{
 		theWindow->BanOnAnim = false;
 	}
+	//Variables para acomodar
+	if (key == GLFW_KEY_UP)
+	{
+		theWindow->posX += 1.0;
+	}
+	if (key == GLFW_KEY_DOWN)
+	{
+		theWindow->posX -= 1.0;
+	}
+	if (key == GLFW_KEY_RIGHT)
+	{
+		theWindow->posZ += 1.0;
+	}
+	if (key == GLFW_KEY_LEFT)
+	{
+		theWindow->posZ -= 1.0;
+	}
+	if (key == GLFW_KEY_B)
+	{
+		theWindow->escale += 1.0;
+	}
+	if (key == GLFW_KEY_V)
+	{
+		theWindow->escale -= 1.0;
+	}
+
+	
+
+	
 
 
 
