@@ -126,6 +126,8 @@ Model Tronco;
 Model GregCuerpo;
 Model GregBrazoIzq;
 Model GregBrazoDer;
+Model Rio;
+Model ViejoMolino;
 
 //Model Casa2;
 Model Personaje2;
@@ -463,6 +465,10 @@ int main()
 	GregBrazoIzq.LoadModel("Models/GregBrazoIzq.obj");
 	GregBrazoDer = Model();
 	GregBrazoDer.LoadModel("Models/GregBrazoDer.obj");
+	Rio = Model();
+	Rio.LoadModel("Models/rio.obj");
+	ViejoMolino = Model();
+	ViejoMolino.LoadModel("Models/ViejoMolino.obj");
 
 
 
@@ -871,7 +877,7 @@ int main()
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		//model = glm::rotate(model, 180 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Arboles.RenderModel();
+		//Arboles.RenderModel();
 
 		//Arboles
 		model = glm::mat4(1.0);
@@ -887,11 +893,11 @@ int main()
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Arboles.RenderModel();
+		//Arboles.RenderModel();
 
 		//Arboles
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(5.0f, 0.0f, -140.0f));
+		model = glm::translate(model, glm::vec3(12.0f, 0.0f, -140.0f));
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -988,7 +994,7 @@ int main()
 		model = glm::rotate(model, -90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 0.0f, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		cabaña2.RenderModel();
+		//cabaña2.RenderModel();
 
 
 		//##########################//
@@ -1099,7 +1105,7 @@ int main()
 		//####      Puente      ####//
 		//##########################//
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(+50.0f,0.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(37.0f,0.4f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Puente.RenderModel();
@@ -1688,9 +1694,11 @@ int main()
 
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-60.608f, 2.778f, 55.0f));
+		model = glm::rotate(model, rotBrazos * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+
+
 		model = glm::scale(model, glm::vec3(0.7f, 0.7f, 0.7f));
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::rotate(model, rotBrazos * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		GregBrazoIzq.RenderModel();
 
@@ -1702,7 +1710,17 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		GregBrazoDer.RenderModel();
 
-		
+
+		//##########################//
+		//####    Viejo Molino  ####//
+		//##########################//
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(5.5f, -0.5f, 60.0f));
+		model = glm::scale(model, glm::vec3(3.7f, 3.7f, 3.7f));
+		model = glm::rotate(model, 180 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		ViejoMolino.RenderModel();
 
 
 
@@ -1712,8 +1730,8 @@ int main()
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);//Va antes de la textura
 
 		//textura con movimiento del humo
-		toffsetu += 0.001 * deltaTime;
-		toffsetv += 0.0 * deltaTime;
+		toffsetu += (0.0005 * sin(-3.14159 * 1.7 + deltaTime * 3));
+		toffsetv += 0.0005 * deltaTime;
 		if (toffsetu > 1.0)
 			toffsetu = 0.0;
 		toffset = glm::vec2(toffsetu, toffsetv);
@@ -1738,6 +1756,17 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		humo.UseTexture();
 		meshList[4]->RenderMesh();
+
+		//##########################//
+		//####         Rio      ####//
+		//##########################//
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(50.0f, -0.21f, -10.0f));
+		model = glm::scale(model, glm::vec3(1.3f, 1.4f, 11.8f));
+		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Rio.RenderModel();
 
 		glDisable(GL_BLEND);//Desactiva el blender
 
