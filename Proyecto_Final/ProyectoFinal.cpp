@@ -104,6 +104,10 @@ float rotMolino = 0;
 
 bool animPersonaje;
 
+float arrastreRio = 0;
+float efecto = 0;
+float recorrido = 0;
+
 //Banderas
 int bandia = 0;
 /*unsigned t0, t1;
@@ -876,6 +880,16 @@ int main()
 			}
 		}
 
+		// Animacion Toroide
+		if (mainWindow.getBanOnAnim()) {
+			if (arrastreRio < 5) {
+				arrastreRio += 0.09;
+			}
+			else if (recorrido < 84.5){
+				recorrido += 0.09;
+			}
+			efecto = (0.3 * sin(3.14159 * 13.3 + deltaTime * 3));
+		}
 
 		//Recibir eventos del usuario
 		glfwPollEvents();
@@ -1015,7 +1029,7 @@ int main()
 		//### Creacion del toroide ###
 		//############################
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(32.0f, 0.3f, -51.0f));
+		model = glm::translate(model, glm::vec3(32.0f+arrastreRio+efecto, 0.3f+efecto, -51.0f+recorrido));
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 
