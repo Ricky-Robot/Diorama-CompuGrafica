@@ -161,6 +161,9 @@ Model ViejoMolino;
 Model MolinoAgua;
 Model LinternaLenador;
 
+Model Arbol_col;
+Model Columpio;
+
 //Model Casa2;
 Model MordecaiCuerpo;
 Model MordecaiBrazoIzq;
@@ -547,7 +550,10 @@ int main()
 	MordecaiBrazoDer.LoadModel("Models/MordecaiBrazoDer.obj");
 	MordecaiBrazoIzq = Model();
 	MordecaiBrazoIzq.LoadModel("Models/MordecaiBrazoIzq.obj");
-
+	Arbol_col = Model();
+	Arbol_col.LoadModel("Models/arbol_columpio.obj");
+	Columpio = Model();
+	Columpio.LoadModel("Models/columpio.obj");
 	std::vector<std::string> skyboxFacesDia;
 
 	skyboxFacesDia.push_back("Textures/Skybox/Day-Skybox_rt.tga");
@@ -1104,6 +1110,84 @@ int main()
 		LamparaFarola.RenderModel();
 
 		
+		//**************
+		//Columpio//
+		//*************
+
+		//Arbol colinpio
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-55.0f, 0.0f, 90.0f));
+		//model = glm::scale(model, glm::vec3(2.0f, 5.0f, 2.0f));
+		model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Arbol_col.RenderModel();
+
+
+		//Arbol colinpio
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-70.0f, 0.0f, 70.0f));
+		//model = glm::scale(model, glm::vec3(2.0f, 5.0f, 2.0f));
+		model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Arbol_col.RenderModel();
+
+		//Arbol colinpio
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-85.0f, 0.0f, 90.0f));
+		//model = glm::scale(model, glm::vec3(2.0f, 5.0f, 2.0f));
+		model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Arbol_col.RenderModel();
+
+
+		//Arbol colinpio
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-100.0f, 0.0f, 70.0f));
+		//model = glm::scale(model, glm::vec3(2.0f, 5.0f, 2.0f));
+		model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Arbol_col.RenderModel();
+
+		//Arbol colinpio
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-115.0f, 0.0f, 90.0f));
+		//model = glm::scale(model, glm::vec3(2.0f, 5.0f, 2.0f));
+		model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Arbol_col.RenderModel();
+
+
+		//Arbol colinpio
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-60.0f, 0.0f, 70.0f));
+		//model = glm::scale(model, glm::vec3(2.0f, 5.0f, 2.0f));
+		model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Arbol_col.RenderModel();
+
+
+
+
+
+		//Arbol colinpio
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-40.0f, 0.0f, 70.0f));
+		//model = glm::scale(model, glm::vec3(2.0f, 5.0f, 2.0f));
+		model = glm::rotate(model, -45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Arbol_col.RenderModel();
+
+		//columpio
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-43.5f, 11.0f, 70.0f));
+		model = glm::scale(model, glm::vec3(0.75f, 1.5f, 1.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, rotColumpio * toRadians, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Columpio.RenderModel();
+
+
+
 		//##########################//
 		//####  Base Meditacion ####//
 		//##########################//
