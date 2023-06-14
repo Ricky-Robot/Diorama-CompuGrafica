@@ -45,6 +45,9 @@ Semestre 2023-2
 const float toRadians = 3.14159265f / 180.0f;
 const float PI = 3.14159265f;
 
+
+
+
 //variables para animación
 float toffsetu;
 float toffsetv;
@@ -92,10 +95,11 @@ std::vector<Shader> shaderList;
 Camera camera;
 Camera camIso;
 
+Texture toroideTexture;
 Texture plainTexture;
 Texture pisoTexture;
 Texture AgaveTexture;
-Texture toroideTexture;
+Texture humo;
 
 
 
@@ -264,6 +268,7 @@ void CreateObjects()
 	obj5->CreateMesh(flechaVertices, flechaIndices, 32, 6);
 	meshList.push_back(obj5);
 
+
 }
 
 void CreateToroide() {
@@ -363,12 +368,14 @@ int main()
 
 	plainTexture = Texture("Textures/plain.png");
 	plainTexture.LoadTextureA();
+	toroideTexture = Texture("Textures/toroide.jpg");
+	toroideTexture.LoadTextureA();
 	pisoTexture = Texture("Textures/piso.tga");
 	pisoTexture.LoadTextureA();
 	AgaveTexture = Texture("Textures/Agave.tga");
 	AgaveTexture.LoadTextureA();
-	toroideTexture = Texture("Textures/toroide.jpg");
-	toroideTexture.LoadTextureA();
+	humo = Texture("Textures/humo.tga");
+	humo.LoadTextureA();
 
 
 	//Pueblo = Model();
@@ -480,15 +487,15 @@ int main()
 	//contador de luces puntuales
 	unsigned int pointLightCount = 0;
 
-	pointLights[0] = PointLight(1.0f, 1.0f, 0.0f,
+	pointLights[0] = PointLight(0.0f, 0.0f, 0.0f,
 		2.5f, 3.3f,
 		-40.0f, 15.0f, -50.0f,
 		1.0f, 0.5f, 0.0f);
 	pointLightCount++;
 
-	pointLights[1] = PointLight(0.8f, 0.5f, 0.5f,
+	pointLights[1] = PointLight(1.0f, 0.3f, 0.3f,
 		3.5f, 1.3f,
-		50.0f, 5.0f, 24.5f ,
+		30.0f, 5.0f, 29.5f ,
 		1.0f, 0.5f, 0.0f);
 	pointLightCount++;
 
@@ -508,26 +515,26 @@ int main()
 	unsigned int spotLightCount = 0;
 	spotLights[0] = SpotLight(1.0f, 1.0f, 1.0f,
 		1.0f, 0.1f,
-		0.0f, 20.0f, -68.0f,
+		13.0f, 50.0f, -60.0f,
 		0.0f, -1.0f, 0.0f,
 		1.0f, 0.0f, 0.0f,
-		30.0f);
+		20.0f);
 	spotLightCount++;
 
 	spotLights[1] = SpotLight(1.0f, 1.0f, 1.0f,
 		1.0f, 0.1f,
-		-48.0f, 20.0f, -10.0f,
+		48.0f, 50.0f, 23.0f,
 		0.0f, -1.0f, 0.0f,
 		1.0f, 0.0f, 0.0f,
-		30.0f);
+		15.0f);
 	spotLightCount++;
 
 	spotLights[2] = SpotLight(1.0f, 1.0f, 1.0f,
 		1.0f, 0.1f,
-		59.0f, 20.0f, -2.0f,
+		-75.0f, 50.0f, 0.0f,
 		0.0f, -1.0f, 0.0f,
 		1.0f, 0.0f, 0.0f,
-		30.0f);
+		25.0f);
 	spotLightCount++;
 
 
@@ -591,7 +598,7 @@ int main()
 	//Soundtrack
 	if (soundtrack) {
 		soundtrack->setPan(0); // Se escucha al centro de las bocinas
-		soundtrack->setVolume(0.2f); // Volumen del soundtrack
+		soundtrack->setVolume(0.05f); // Volumen del soundtrack
 	}
 
 	//______**Sonidos espaciales**______
@@ -602,6 +609,23 @@ int main()
 	if (s_FuenteAgua) { //Configuración
 		s_FuenteAgua->setMinDistance(2.0f); // Radio minimo distancia
 		s_FuenteAgua->setVolume(1.0f); // Volumen del sonido ( 0 a 1)
+	}
+
+	//Tematica avatar
+	irrklang::vec3df position_AvatarA(80.0f, 0.5f, 0.0f); //Posicion del audio
+	irrklang::ISound* temploAvatar = engine->play3D("Audios/Invacion Palacio.mp3", position_AvatarA, true, false, true);
+
+	if (temploAvatar) { //Configuración
+		temploAvatar->setMinDistance(16.0f); // Radio minimo distancia
+		temploAvatar->setVolume(1.0f); // Volumen del sonido ( 0 a 1)
+	}
+
+	irrklang::vec3df position_AvatarB(-45.0f, 0.5f, 0.0f); //Posicion del audio
+	irrklang::ISound* flautasAvatarB = engine->play3D("Audios/Avatar Soundtrack End.mp3", position_AvatarB, true, false, true);
+
+	if (flautasAvatarB) { //Configuración
+		flautasAvatarB->setMinDistance(11.0f); // Radio minimo distancia
+		flautasAvatarB->setVolume(1.0f); // Volumen del sonido ( 0 a 1)
 	}
 
 	////Loop mientras no se cierra la ventana
@@ -626,19 +650,7 @@ int main()
 		}
 
 
-		//Animación Voltorb y Electrode
-		if (movVol < 10.0f && arriba == false && mainWindow.getBanOnAnim() == true) {
-			movVol += movVolOffset * deltaTime;
-			rotVol += rotVolOffset * deltaTime;
-			if (movVol < 10.5f && movVol > 9.5f)
-				arriba = true;
-		}
-		else if (movVol > 0.0f && arriba == true && mainWindow.getBanOnAnim() == true) {
-			movVol -= movVolOffset * deltaTime;
-			rotVol -= rotVolOffset * deltaTime;
-			if (movVol < 0.5f && movVol > -0.5f)
-				arriba = false;
-		}
+		
 
 		//Animacion luciernagas
 		if ( mainWindow.getBanOnAnim() == true) {
@@ -828,7 +840,7 @@ int main()
 		meshList[2]->RenderMesh();
 
 		//Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		
+
 		//############################
 		//### Creacion del toroide ###
 		//############################
@@ -838,8 +850,7 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		toroideTexture.UseTexture();
 		meshList[5]->RenderMesh();
-
-
+		
 		//Arboles
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-115.0f, 0.0f, 0.0f));
@@ -874,53 +885,34 @@ int main()
 
 		//Farola1
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-115.0f + mainWindow.getposx(), 0.0f, 0.0f + mainWindow.getposy()));
-		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
-		model = glm::rotate(model, -90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(15.0f , 0.0f, -60.0f ));
+		model = glm::scale(model, glm::vec3(2.0f, 5.0f, 2.0f));
+		model = glm::rotate(model, 180 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//Farola.RenderModel();
+		Farola.RenderModel();
 
 		//Farola2
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-115.0f + mainWindow.getposx(), 0.0f, 0.0f + mainWindow.getposy()));
-		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
-		//model = glm::rotate(model, -90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(48.0f , 0.0f, 25.0f ));
+		model = glm::scale(model, glm::vec3(2.0f, 5.0f, 2.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//Farola.RenderModel();
+		Farola.RenderModel();
 
 		//Farola3
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-115.0f + mainWindow.getposx(), 0.0f, 0.0f + mainWindow.getposy()));
-		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
-		model = glm::rotate(model, 180 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(-77.0f , 0.0f, 0.0f ));
+		model = glm::scale(model, glm::vec3(2.0f, 5.0f, 2.0f));
+		//model = glm::rotate(model, 180 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//Farola.RenderModel();
+		Farola.RenderModel();
 
-		//Poste1
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-115.0f + mainWindow.getposx(), 0.0f, 0.0f + mainWindow.getposy()));
-		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//Poste.RenderModel();
-
-		//Poste2
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-115.0f + mainWindow.getposx(), 0.0f, 0.0f + mainWindow.getposy()));
-		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//Poste.RenderModel();
-
-		//Poste3
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-115.0f + mainWindow.getposx(), 0.0f, 0.0f + mainWindow.getposy()));
-		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//Poste.RenderModel();
+		
 		
 		
 		//Farola Pagoda
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(50.0f , 0.0f, 25.0f));
+		model = glm::translate(model, glm::vec3(30.0f , 0.0f, 30.0f));
 		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		LamparaFarola.RenderModel();
@@ -1184,13 +1176,13 @@ int main()
 		//######################//
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-23.0f , 0.0f, -70.0f  ));
-		//model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.5f, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		arbol.RenderModel();
 
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(10.0f , 0.0f, -70.0f + mainWindow.getposy()));
-		//model = glm::scale(model, glm::vec3(0.f, 0.5f, 0.5f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.5f, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		arbol.RenderModel();
 
@@ -1675,9 +1667,9 @@ int main()
 		model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
 		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//humo.UseTexture();
-		//Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		//meshList[4]->RenderMesh();
+		humo.UseTexture();
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[4]->RenderMesh();
 
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-24.772f, 31.392f, 3.27f));
@@ -1686,8 +1678,8 @@ int main()
 		model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
 		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//humo.UseTexture();
-		//meshList[4]->RenderMesh();
+		humo.UseTexture();
+		meshList[4]->RenderMesh();
 
 		glDisable(GL_BLEND);//Desactiva el blender
 
@@ -1696,7 +1688,6 @@ int main()
 		mainWindow.swapBuffers();
 	}
 
-	engine->drop(); //Eliminar audios
 	return 0;
 }
 
