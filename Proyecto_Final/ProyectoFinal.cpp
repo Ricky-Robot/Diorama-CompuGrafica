@@ -83,6 +83,9 @@ float rotColumpioOffset, rotSyBOffset;
 bool BanColumpio, BanSyB;
 float incRot;
 
+float rotBrazos = 0;
+bool dirBrazos = false;
+
 //Banderas
 int bandia = 0;
 /*unsigned t0, t1;
@@ -120,6 +123,9 @@ Model Banca;
 Model Farola;
 Model Poste;
 Model Tronco;
+Model GregCuerpo;
+Model GregBrazoIzq;
+Model GregBrazoDer;
 
 //Model Casa2;
 Model Personaje2;
@@ -360,7 +366,7 @@ int main()
 	CreateToroide();
 	CreateShaders();
 
-	camera = Camera(glm::vec3(-60.0f, 5.0f, 50.0f), glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, 0.0f, 0.5f, 0.5f);//Ligada al planoXZ
+	camera = Camera(glm::vec3(-60.0f, 4.0f, 50.0f), glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, 0.0f, 0.5f, 0.5f);//Ligada al planoXZ
 	//camIso = Camera(glm::vec3(-150.0f, 150.0f, 150.0f), glm::vec3(0.0f, 1.0f, 0.0f), -45.0f, -45.0f, 0.5f, 0.5f);//Isometrica
 	
 	//Original
@@ -451,6 +457,14 @@ int main()
 	LamparaFarola.LoadModel("Models/lampara.obj");
 	luciernaga = Model();
 	luciernaga.LoadModel("Models/Luciernaga.obj");
+	GregCuerpo = Model();
+	GregCuerpo.LoadModel("Models/GregCuerpoTemp.obj");
+	GregBrazoIzq = Model();
+	GregBrazoIzq.LoadModel("Models/GregBrazoIzq.obj");
+	GregBrazoDer = Model();
+	GregBrazoDer.LoadModel("Models/GregBrazoDer.obj");
+
+
 
 	std::vector<std::string> skyboxFacesDia;
 
@@ -1646,6 +1660,50 @@ int main()
 		model = glm::rotate(model, -90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Banca.RenderModel();
+
+		//##########################//
+		//#### Greg - Personaje Principal ####//
+		//##########################//
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-60.0f, 0.0f, 55.0f));
+		model = glm::scale(model, glm::vec3(0.7f, 0.7f, 0.7f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		GregCuerpo.RenderModel();
+
+		if (!dirBrazos) {
+			rotBrazos += 0.1;
+			if (rotBrazos > 70) {
+				dirBrazos = !dirBrazos;
+
+			}
+		}
+		else if (dirBrazos){
+			rotBrazos -= 0.1;
+
+			if (rotBrazos < 0) {
+				dirBrazos = !dirBrazos;
+			}
+		}
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-60.608f, 2.778f, 55.0f));
+		model = glm::scale(model, glm::vec3(0.7f, 0.7f, 0.7f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, rotBrazos * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		GregBrazoIzq.RenderModel();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-60.0f, 0.0f, 55.0f));
+		model = glm::scale(model, glm::vec3(0.7f, 0.7f, 0.7f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, rotBrazos * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		GregBrazoDer.RenderModel();
+
+		
+
 
 
 
