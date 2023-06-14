@@ -86,6 +86,11 @@ float incRot;
 float rotBrazos = 0;
 bool dirBrazos = false;
 
+//key frames
+float levAang;
+float levRocs, inclRocs, giroRocs;
+float levEst;
+
 //Banderas
 int bandia = 0;
 /*unsigned t0, t1;
@@ -121,6 +126,8 @@ Model Puente;
 Model Base;
 Model Banca;
 Model Farola;
+Model Aang;
+Model Rocas;
 Model Poste;
 Model Tronco;
 Model GregCuerpo;
@@ -427,6 +434,8 @@ int main()
 	Puente.LoadModel("Models/puente.obj");
 	Columpio = Model();
 	Columpio.LoadModel("Models/Columpio.obj");
+	Aang = Model();
+	Aang.LoadModel("Models/Aang.obj");
 	Banca = Model();
 	Banca.LoadModel("Models/banca_1.obj");
 	Reja = Model();
@@ -469,6 +478,8 @@ int main()
 	Rio.LoadModel("Models/rio.obj");
 	ViejoMolino = Model();
 	ViejoMolino.LoadModel("Models/ViejoMolino.obj");
+	Rocas = Model();
+	Rocas.LoadModel("Models/rocagira.obj");
 
 
 
@@ -597,6 +608,11 @@ int main()
 	gly = 1.0f;
 	glz = 1.0f;
 	gl = 1.0f;
+
+	//key frames
+	levAang = levEst = levRocs = 0.0f;
+	inclRocs = 0.0f;
+	giroRocs = 0.0f;
 
 	// Obtención del tiempo actual
 	auto tiempo_anterior = std::chrono::steady_clock::now();
@@ -962,6 +978,41 @@ int main()
 		modelaux = model;
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Base.RenderModel();
+
+
+
+		//##########################//
+		//####       Aang       ####//
+		//##########################//
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-45.0f, 3.0f + levAang, 0.0f));
+		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Aang.RenderModel();
+
+
+		//##########################//
+		//####      rocas       ####//
+		//##########################//
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-45.0f, 3.0f + levRocs, 0.0f));
+		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+		model = glm::rotate(model, giroRocs * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, inclRocs * toRadians, glm::vec3(-1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Rocas.RenderModel();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-45.0f, 3.0f + levRocs, 0.0f));
+		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+		model = glm::rotate(model, giroRocs * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, inclRocs * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Rocas.RenderModel();
 
 
 
