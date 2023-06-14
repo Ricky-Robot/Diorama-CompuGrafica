@@ -31,8 +31,6 @@ Semestre 2023-2
 #include "Model.h"
 #include "Skybox.h"
 
-
-
 //para iluminación
 #include "CommonValues.h"
 #include "DirectionalLight.h"
@@ -40,6 +38,9 @@ Semestre 2023-2
 #include "SpotLight.h"
 #include "Material.h"
 #include <chrono>
+
+//Implementación del audio
+#include "irrKlang.h"
 
 
 
@@ -502,10 +503,39 @@ int main()
 	glz = 1.0f;
 	gl = 1.0f;
 
-
-	
 	// Obtención del tiempo actual
 	auto tiempo_anterior = std::chrono::steady_clock::now();
+
+	//##############################
+	//Inicializar motor de Audio ###
+	//##############################
+	irrklang::ISoundEngine* engine = irrklang::createIrrKlangDevice();
+	
+	if (!engine) //Se verifica si se pudo cargar el motor
+		return 0;
+
+	//#############################################################
+	//#### Aquí van las declaraciones de los diferentes audios ####
+	//#############################################################
+
+	//_______**Soundtrack** _______
+	irrklang::ISound* soundtrack = engine->play2D("Audios/Owns_Battle-Avatar_Soundtrack.mp3", true, false, true);
+	//Radio de sonido
+	//Soundtrack
+	if (soundtrack) {
+		soundtrack->setPan(0); // Se escucha al centro de las bocinas
+		soundtrack->setVolume(0.2f); // Volumen del soundtrack
+	}
+
+	//______**Sonidos espaciales**______
+	// Fuente de agua
+	irrklang::vec3df position(-10.0f, 0.5f, -65.0f); //Posicion del audio
+	irrklang::ISound* s_FuenteAgua = engine->play3D("Audios/Fuente_agua_sonido.mp3", position, true, false, true);
+	
+	if (s_FuenteAgua) { //Configuración
+		s_FuenteAgua->setMinDistance(2.0f); // Radio minimo distancia
+		s_FuenteAgua->setVolume(1.0f); // Volumen del sonido ( 0 a 1)
+	}
 
 	////Loop mientras no se cierra la ventana
 	while (!mainWindow.getShouldClose())
@@ -515,7 +545,7 @@ int main()
 		deltaTime += (now - lastTime) / limitFPS;
 		lastTime = now;
 
-		//Obtiene el tiempo Stranscurrido actual
+		//Obtiene el tiempo transcurrido actual
 		auto tiempo_actual = std::chrono::steady_clock::now();
 
 		//Obtiene la diferencia de tiempo
@@ -702,7 +732,23 @@ int main()
 		glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
 		glm::vec2 toffset = glm::vec2(0.0f, 0.0f);//Se declara al inicio para que las texturas no se muevan
 
-		//Piso
+		glm::vec3 positionL = camera.getCameraPosition();
+		glm::vec3 directionL = camera.getCameraDirection();
+
+		//################################################//
+		//####  Posición del personaje para el audio  ####//
+		//################################################//
+
+		irrklang::vec3df position(positionL.x, positionL.y, positionL.z); // position of the listener
+		irrklang::vec3df lookDirection(-directionL.x, -directionL.y, -directionL.z);// the direction the listener looks into
+		irrklang::vec3df velPerSecond(0.0f, 0.0f, 0.0f);    // only relevant for doppler effects
+		irrklang::vec3df upVector(0.0f, 1.0f, 0.0f);     // where 'up' is in your 3D scene
+
+		engine->setListenerPosition(position, lookDirection, velPerSecond, upVector);
+
+		//############
+		//##  Piso  ##
+		//############
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -10.0f));
 		model = glm::scale(model, glm::vec3(13.0f, 1.0f, 14.0f));
@@ -983,6 +1029,8 @@ int main()
 		model = glm::scale(model, glm::vec3(3.0f, 3.0f, 3.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		CasaParque.RenderModel();
+
+
 		//##########################//
 		//#### Fuente del Parque####//
 		//##########################//
@@ -1135,8 +1183,6 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		arbol.RenderModel();
 
-
-
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-93.0f , 0.0f, -125.0f));
 		model = glm::scale(model, glm::vec3(0.75f, 1.0f, 0.75f));
@@ -1154,7 +1200,6 @@ int main()
 		model = glm::scale(model, glm::vec3(0.75f, 1.0f, 0.75f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		arbol.RenderModel();
-
 
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-90.0f , 0.0f, -85.0f));
@@ -1281,9 +1326,9 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		arbol.RenderModel();
 
-		//-----------------------
-		//Cerezos
-		//------------------------
+		//######################//
+		//#### Cerezos		####//
+		//######################//
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(80.0f , 0.0f, 30.0f ));
 		model = glm::scale(model, glm::vec3(2.5f, 3.5f, 2.5f));
@@ -1371,10 +1416,10 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		cerezo.RenderModel();
 
-		//----------------------------
-		//Arbustos
-		//-----------------------------
 
+		//######################//
+		//#### Arbustos		####//
+		//######################//
 
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-115.0f + mainWindow.getposx(), 0.0f, 0.0f + mainWindow.getposy()));
