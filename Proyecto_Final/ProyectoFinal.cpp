@@ -92,12 +92,6 @@ float levRocs, inclRocs, giroRocs;
 float levEst;
 
 float rotMolino = 0;
-//key frames
-float levAang;
-float levRocs, inclRocs, giroRocs;
-float levEst;
-
-float rotMolino = 0;
 
 //Banderas
 int bandia = 0;
@@ -385,7 +379,7 @@ int main()
 	CreateToroide();
 	CreateShaders();
 
-	camera = Camera(glm::vec3(-60.0f, 4.0f, 50.0f), glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, 0.0f, 0.5f, 0.5f);//Ligada al planoXZ
+	camera = Camera(glm::vec3(-120.0f, 4.0f, 100.0f), glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, 0.0f, 0.5f, 0.5f);//Ligada al planoXZ
 	//camIso = Camera(glm::vec3(-150.0f, 150.0f, 150.0f), glm::vec3(0.0f, 1.0f, 0.0f), -45.0f, -45.0f, 0.5f, 0.5f);//Isometrica
 	
 	//Original
