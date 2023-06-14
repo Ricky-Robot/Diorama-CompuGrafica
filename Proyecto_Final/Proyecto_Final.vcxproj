@@ -167,8 +167,6 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="shaders\shader_anim.frag" />
-    <None Include="shaders\shader_anim.vert" />
     <None Include="shaders\shader_light.frag" />
     <None Include="shaders\shader_light.vert" />
     <None Include="shaders\skybox.frag" />

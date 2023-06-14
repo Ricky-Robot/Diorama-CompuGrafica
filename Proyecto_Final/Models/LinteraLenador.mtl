@@ -1,0 +1,1998 @@
+newmtl Troncos:lambert24SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl Troncos:lambert26SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura.jpg
+Ni 1.00
+newmtl Troncos:pasted__lambert24SG3
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl Troncos:pasted__lambert25SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura.jpg
+Ni 1.00
+newmtl Troncos:pasted__pasted__lambert24SG3
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl Troncos:pasted__pasted__lambert24SG4
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl Troncos:pasted__pasted__lambert24SG7
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl Troncos:pasted__pasted__lambert25SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura.jpg
+Ni 1.00
+newmtl Troncos:pasted__pasted__pasted__lambert25SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura.jpg
+Ni 1.00
+newmtl Troncos:pasted__pasted__pasted__lambert25SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura.jpg
+Ni 1.00
+newmtl Troncos:pasted__pasted__pasted__lambert25SG5
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura.jpg
+Ni 1.00
+newmtl Vintage_Furniture_Coffee_Table_OBJ:pasted__phong1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd VF_Coffee_Table_Textures_BaseColor.png
+map_Ka VF_Coffee_Table_Textures_AO.png
+bump  -bm 1 VF_Coffee_Table_Textures_Normal.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks VF_Coffee_Table_Textures_Metallic.png
+Ns 18.00
+newmtl initialShadingGroup
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl lambert7SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl lambert8SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Roca_textura.jpg
+Ni 1.00
+newmtl lambert9SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Roca_textura.jpg
+Ni 1.00
+newmtl lambert10SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v2.jpg
+Ni 1.00
+newmtl lambert11SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v3.jpg
+Ni 1.00
+newmtl lambert13SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v7.jpg
+Ni 1.00
+newmtl lambert16SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd textura-rejilla.png
+Ni 1.00
+newmtl lambert18SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TelaSofa-Textura.jpg
+Ni 1.00
+newmtl lambert20SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TelaSofa-Textura.jpg
+Ni 1.00
+newmtl lambert21SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl lambert22SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TelaSofa-Textura.jpg
+Ni 1.00
+newmtl lambert23SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl lambert24SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Puerta-Textura.jpg
+Ni 1.00
+newmtl lambert26SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl lambert27SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Puerta-Textura.jpg
+Ni 1.00
+newmtl lambert28SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl lambert29SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd textura_cobre_4.jpg
+Ni 1.00
+newmtl lambert30SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Vidrio_Textura.png
+Ni 1.00
+newmtl lambert31SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl mill:lambert1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v3.jpg
+Ni 1.00
+newmtl mill:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill:mill:lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill:mill:lambert6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v2.jpg
+Ni 1.00
+newmtl mill:mill:lambert8SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill:mill:lambert9SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill:mill:mill:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill:mill:mill:lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill:mill:mill:mill:mill:mill:lambert11SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v6.jpg
+Ni 1.00
+newmtl mill:mill:mill:mill:mill:mill:lambert12SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Puerta-Textura.jpg
+Ni 1.00
+newmtl mill:mill:mill:mill:mill:mill:lambert13SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill:mill:mill:mill:mill:mill:lambert16SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Roca_textura.jpg
+Ni 1.00
+newmtl mill:mill:mill:mill:mill:mill:lambert17SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v7.jpg
+Ni 1.00
+newmtl mill:mill:mill:mill:mill:mill:lambert18SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl mill:mill:mill:mill:mill:mill:lambert19SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill:mill:mill:mill:mill:mill:lambert20SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill:mill:mill:mill:mill:mill:lambert21SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill:mill:mill:mill:mill:mill:lambert22SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill:mill:mill:mill:mill:mill:lambert23SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill:mill:mill:mill:mill:mill:lambert24SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill:mill:mill:mill:mill:mill:lambert25SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Borde-Escalera-Textura.jpg
+Ni 1.00
+newmtl mill:mill:mill:mill:mill:mill:lambert26SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Borde-Escalera-Textura.jpg
+Ni 1.00
+newmtl mill:mill:mill:mill:mill:mill:lambert27SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill:mill:mill:mill:mill:mill:lambert29SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v9.jpg
+Ni 1.00
+newmtl mill:mill:mill:mill:mill:mill:lambert31SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill:mill:mill2:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill:mill:mill2:mill:mill:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill:mill:mill2:mill:mill:lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill:mill:mill3:mill:mill2:mill:mill:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill:mill:mill3:mill:mill2:mill:mill:lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill:mill:mill4:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill:mill:mill4:mill:mill3:mill:mill2:mill:mill:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill:mill:mill4:mill:mill3:mill:mill2:mill:mill:lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill:mill:mill6:mill:lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill:mill:mill6:mill:lambert6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v2.jpg
+Ni 1.00
+newmtl mill:mill:mill6:mill:mill2:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill:mill:mill8:mill:lambert8SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill:mill:mill10:mill:polySurface23SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl mill:mill:mill11:mill:mill10:mill:polySurface23SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl mill:mill:mill12:mill:mill11:mill:mill10:mill:polySurface23SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl mill:mill:mill13:mill:polySurface23SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl mill:mill:mill26:lambert1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v3.jpg
+Ni 1.00
+newmtl mill:mill:mill26:mill:lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill:mill:mill26:mill:lambert6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v2.jpg
+Ni 1.00
+newmtl mill:mill:mill26:mill:lambert8SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill:mill:mill26:mill:lambert9SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill:mill:mill26:mill:mill:mill:mill:mill:lambert11SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v6.jpg
+Ni 1.00
+newmtl mill:mill:mill26:mill:mill:mill:mill:mill:lambert13SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill:mill:mill26:mill:mill:mill:mill:mill:lambert16SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Roca_textura.jpg
+Ni 1.00
+newmtl mill:mill:mill26:mill:mill2:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill:mill:mill26:mill:mill6:mill:lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill:mill:mill26:mill:mill6:mill:lambert6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v2.jpg
+Ni 1.00
+newmtl mill:mill:mill26:mill:mill6:mill:mill2:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill:mill:mill26:mill:mill8:mill:lambert8SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill:mill:mill27:mill:mill:mill:mill:mill:lambert26SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Borde-Escalera-Textura.jpg
+Ni 1.00
+newmtl mill:mill:mill28:mill:mill27:mill:mill:mill:mill:mill:lambert26SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Borde-Escalera-Textura.jpg
+Ni 1.00
+newmtl mill:mill:mill29:mill:mill28:mill:mill27:mill:mill:mill:mill:mill:lambert26SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Borde-Escalera-Textura.jpg
+Ni 1.00
+newmtl mill:mill:mill30:mill:mill27:mill:mill:mill:mill:mill:lambert26SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Borde-Escalera-Textura.jpg
+Ni 1.00
+newmtl mill:mill:mill31:mill:mill30:mill:mill27:mill:mill:mill:mill:mill:lambert26SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Borde-Escalera-Textura.jpg
+Ni 1.00
+newmtl mill:mill:mill32:mill:mill:mill:mill:mill:lambert12SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Puerta-Textura.jpg
+Ni 1.00
+newmtl mill:mill:mill33:mill:lambert1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Piedras-Chimenea-Textura.jpg
+Ni 1.00
+newmtl mill:mill:mill33:mill:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Llama-Chimenea-Texture.jpg
+Ni 1.00
+newmtl mill:mill:mill33:mill:lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl mill:mill:piso_exterior:lambert6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd pasto_textura_v1.jpg
+Ni 1.00
+newmtl mill:mill:polySurface23SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl mill:mill:rio:lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd agua_textura_cartoon.jpeg
+Ni 1.00
+newmtl mill1:lambert1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v3.jpg
+Ni 1.00
+newmtl mill1:mill:lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill1:mill:lambert6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v2.jpg
+Ni 1.00
+newmtl mill1:mill:lambert8SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill1:mill:lambert9SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill1:mill:mill:mill:mill:mill:lambert11SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v6.jpg
+Ni 1.00
+newmtl mill1:mill:mill:mill:mill:mill:lambert13SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill1:mill:mill:mill:mill:mill:lambert16SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Roca_textura.jpg
+Ni 1.00
+newmtl mill1:mill:mill:mill:mill:mill:lambert18SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl mill1:mill:mill:mill:mill:mill:lambert19SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill1:mill:mill:mill:mill:mill:lambert20SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill1:mill:mill:mill:mill:mill:lambert21SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill1:mill:mill:mill:mill:mill:lambert22SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill1:mill:mill:mill:mill:mill:lambert23SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill1:mill:mill:mill:mill:mill:lambert24SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill1:mill:mill:mill:mill:mill:lambert27SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill1:mill:mill:mill:mill:mill:lambert29SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v9.jpg
+Ni 1.00
+newmtl mill1:mill:mill:mill:mill:mill:lambert31SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill1:mill:mill2:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill1:mill:mill6:mill:lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill1:mill:mill6:mill:lambert6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v2.jpg
+Ni 1.00
+newmtl mill1:mill:mill6:mill:mill2:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill1:mill:mill8:mill:lambert8SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill1:mill:mill32:mill:mill:mill:mill:mill:lambert12SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Puerta-Textura.jpg
+Ni 1.00
+newmtl mill1:mill:mill33:mill:lambert1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Piedras-Chimenea-Textura.jpg
+Ni 1.00
+newmtl mill1:mill:mill33:mill:lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl mill2:lambert1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v3.jpg
+Ni 1.00
+newmtl mill2:mill:lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill2:mill:lambert6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v2.jpg
+Ni 1.00
+newmtl mill2:mill:lambert8SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill2:mill:lambert9SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill2:mill:mill:mill:mill:mill:lambert11SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v6.jpg
+Ni 1.00
+newmtl mill2:mill:mill:mill:mill:mill:lambert13SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill2:mill:mill:mill:mill:mill:lambert16SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Roca_textura.jpg
+Ni 1.00
+newmtl mill2:mill:mill:mill:mill:mill:lambert18SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl mill2:mill:mill:mill:mill:mill:lambert19SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill2:mill:mill:mill:mill:mill:lambert20SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill2:mill:mill:mill:mill:mill:lambert21SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill2:mill:mill:mill:mill:mill:lambert22SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill2:mill:mill:mill:mill:mill:lambert23SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill2:mill:mill:mill:mill:mill:lambert24SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill2:mill:mill:mill:mill:mill:lambert27SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill2:mill:mill:mill:mill:mill:lambert29SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v9.jpg
+Ni 1.00
+newmtl mill2:mill:mill:mill:mill:mill:lambert31SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill2:mill:mill2:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill2:mill:mill6:mill:lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill2:mill:mill6:mill:lambert6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v2.jpg
+Ni 1.00
+newmtl mill2:mill:mill6:mill:mill2:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill2:mill:mill8:mill:lambert8SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill2:mill:mill32:mill:mill:mill:mill:mill:lambert12SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Puerta-Textura.jpg
+Ni 1.00
+newmtl mill2:mill:mill33:mill:lambert1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Piedras-Chimenea-Textura.jpg
+Ni 1.00
+newmtl mill2:mill:mill33:mill:lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl mill3:lambert1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v3.jpg
+Ni 1.00
+newmtl mill3:mill:lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill3:mill:lambert6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v2.jpg
+Ni 1.00
+newmtl mill3:mill:lambert8SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill3:mill:lambert9SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill3:mill:mill:mill:mill:mill:lambert11SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v6.jpg
+Ni 1.00
+newmtl mill3:mill:mill:mill:mill:mill:lambert13SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill3:mill:mill:mill:mill:mill:lambert16SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Roca_textura.jpg
+Ni 1.00
+newmtl mill3:mill:mill:mill:mill:mill:lambert18SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl mill3:mill:mill:mill:mill:mill:lambert19SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill3:mill:mill:mill:mill:mill:lambert20SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill3:mill:mill:mill:mill:mill:lambert21SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill3:mill:mill:mill:mill:mill:lambert22SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill3:mill:mill:mill:mill:mill:lambert23SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill3:mill:mill:mill:mill:mill:lambert24SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill3:mill:mill:mill:mill:mill:lambert27SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill3:mill:mill:mill:mill:mill:lambert29SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v9.jpg
+Ni 1.00
+newmtl mill3:mill:mill:mill:mill:mill:lambert31SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill3:mill:mill2:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill3:mill:mill6:mill:lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill3:mill:mill6:mill:lambert6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v2.jpg
+Ni 1.00
+newmtl mill3:mill:mill6:mill:mill2:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill3:mill:mill8:mill:lambert8SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill3:mill:mill32:mill:mill:mill:mill:mill:lambert12SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Puerta-Textura.jpg
+Ni 1.00
+newmtl mill3:mill:mill33:mill:lambert1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Piedras-Chimenea-Textura.jpg
+Ni 1.00
+newmtl mill3:mill:mill33:mill:lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl mill4:lambert1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v3.jpg
+Ni 1.00
+newmtl mill4:mill:lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill4:mill:lambert6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v2.jpg
+Ni 1.00
+newmtl mill4:mill:lambert8SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill4:mill:lambert9SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill4:mill:mill:mill:mill:mill:lambert11SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v6.jpg
+Ni 1.00
+newmtl mill4:mill:mill:mill:mill:mill:lambert13SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill4:mill:mill:mill:mill:mill:lambert16SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Roca_textura.jpg
+Ni 1.00
+newmtl mill4:mill:mill:mill:mill:mill:lambert18SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl mill4:mill:mill:mill:mill:mill:lambert19SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill4:mill:mill:mill:mill:mill:lambert20SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill4:mill:mill:mill:mill:mill:lambert21SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill4:mill:mill:mill:mill:mill:lambert22SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill4:mill:mill:mill:mill:mill:lambert23SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill4:mill:mill:mill:mill:mill:lambert24SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill4:mill:mill:mill:mill:mill:lambert27SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill4:mill:mill:mill:mill:mill:lambert29SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v9.jpg
+Ni 1.00
+newmtl mill4:mill:mill:mill:mill:mill:lambert31SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill4:mill:mill2:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill4:mill:mill6:mill:lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill4:mill:mill6:mill:lambert6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v2.jpg
+Ni 1.00
+newmtl mill4:mill:mill6:mill:mill2:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill4:mill:mill8:mill:lambert8SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill4:mill:mill32:mill:mill:mill:mill:mill:lambert12SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Puerta-Textura.jpg
+Ni 1.00
+newmtl mill4:mill:mill33:mill:lambert1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Piedras-Chimenea-Textura.jpg
+Ni 1.00
+newmtl mill4:mill:mill33:mill:lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl mill5:lambert1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v3.jpg
+Ni 1.00
+newmtl mill5:mill:lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill5:mill:lambert6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v2.jpg
+Ni 1.00
+newmtl mill5:mill:lambert8SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill5:mill:lambert9SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill5:mill:mill:mill:mill:mill:lambert11SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v6.jpg
+Ni 1.00
+newmtl mill5:mill:mill:mill:mill:mill:lambert13SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill5:mill:mill:mill:mill:mill:lambert16SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Roca_textura.jpg
+Ni 1.00
+newmtl mill5:mill:mill:mill:mill:mill:lambert18SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl mill5:mill:mill:mill:mill:mill:lambert19SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill5:mill:mill:mill:mill:mill:lambert20SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill5:mill:mill:mill:mill:mill:lambert21SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill5:mill:mill:mill:mill:mill:lambert22SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill5:mill:mill:mill:mill:mill:lambert23SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill5:mill:mill:mill:mill:mill:lambert24SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill5:mill:mill:mill:mill:mill:lambert27SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill5:mill:mill:mill:mill:mill:lambert29SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v9.jpg
+Ni 1.00
+newmtl mill5:mill:mill:mill:mill:mill:lambert31SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Pared-Interior-Textura.jpg
+Ni 1.00
+newmtl mill5:mill:mill2:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill5:mill:mill6:mill:lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v4.jpg
+Ni 1.00
+newmtl mill5:mill:mill6:mill:lambert6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v2.jpg
+Ni 1.00
+newmtl mill5:mill:mill6:mill:mill2:lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v1.jpg
+Ni 1.00
+newmtl mill5:mill:mill8:mill:lambert8SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v5.jpg
+Ni 1.00
+newmtl mill5:mill:mill32:mill:mill:mill:mill:mill:lambert12SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Puerta-Textura.jpg
+Ni 1.00
+newmtl mill5:mill:mill33:mill:lambert1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Piedras-Chimenea-Textura.jpg
+Ni 1.00
+newmtl mill5:mill:mill33:mill:lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl mill8:mill:mill:mill:mill:mill:lambert11SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v6.jpg
+Ni 1.00
+newmtl mill13:mill:mill:mill:mill:mill:lambert11SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v6.jpg
+Ni 1.00
+newmtl pasted__lambert9SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Roca_textura.jpg
+Ni 1.00
+newmtl pasted__lambert16SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd textura-rejilla.png
+Ni 1.00
+newmtl pasted__lambert18SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TelaSofa-Textura.jpg
+Ni 1.00
+newmtl pasted__lambert19SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__lambert20SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TelaSofa-Textura.jpg
+Ni 1.00
+newmtl pasted__lambert21SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__lambert21SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__lambert22SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd TelaSofa-Textura.jpg
+Ni 1.00
+newmtl pasted__lambert23SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__lambert31SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__lambert31SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__pasted__lambert9SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Roca_textura.jpg
+Ni 1.00
+newmtl pasted__pasted__lambert19SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__lambert19SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__lambert21SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__lambert31SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__pasted__lambert31SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__pasted__lambert31SG3
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__pasted__lambert31SG4
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__pasted__lambert31SG5
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__lambert9SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Roca_textura.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__lambert19SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__lambert31SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__lambert31SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__lambert31SG3
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__lambert31SG4
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__lambert31SG5
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__lambert31SG6
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__lambert19SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__lambert19SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__lambert19SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__lambert19SG3
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__lambert19SG4
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__lambert31SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__lambert31SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__lambert31SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__lambert31SG4
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__lambert31SG5
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__lambert19SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__lambert19SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__lambert19SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__lambert19SG3
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__lambert19SG4
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__lambert19SG5
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__lambert31SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__lambert31SG3
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Textura-Humo.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__lambert19SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__lambert19SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert19SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert19SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert19SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert19SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__pasted__lambert19SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Madera-Textura_v8.jpg
+Ni 1.00
+newmtl silla:phong6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.43 0.43 0.43
+Tf 1.00 1.00 1.00
+map_Kd VF_Coffee_Table_Textures_BaseColor.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl silla1:phong6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.43 0.43 0.43
+Tf 1.00 1.00 1.00
+map_Kd VF_Coffee_Table_Textures_BaseColor.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00

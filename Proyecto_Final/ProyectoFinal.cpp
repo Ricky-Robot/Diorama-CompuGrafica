@@ -86,6 +86,8 @@ float incRot;
 float rotBrazos = 0;
 bool dirBrazos = false;
 
+float rotMolino = 0;
+
 //Banderas
 int bandia = 0;
 /*unsigned t0, t1;
@@ -128,6 +130,8 @@ Model GregBrazoIzq;
 Model GregBrazoDer;
 Model Rio;
 Model ViejoMolino;
+Model MolinoAgua;
+Model LinternaLenador;
 
 //Model Casa2;
 Model Personaje2;
@@ -469,7 +473,10 @@ int main()
 	Rio.LoadModel("Models/rio.obj");
 	ViejoMolino = Model();
 	ViejoMolino.LoadModel("Models/ViejoMolino.obj");
-
+	MolinoAgua = Model();
+	MolinoAgua.LoadModel("Models/MolinoAgua.obj");
+	LinternaLenador = Model();
+	LinternaLenador.LoadModel("Models/LinternaLenador.obj");
 
 
 	std::vector<std::string> skyboxFacesDia;
@@ -507,10 +514,10 @@ int main()
 	//contador de luces puntuales
 	unsigned int pointLightCount = 0;
 
-	pointLights[0] = PointLight(0.0f, 0.0f, 0.0f,
-		2.5f, 3.3f,
-		-40.0f, 15.0f, -50.0f,
-		1.0f, 0.5f, 0.0f);
+	pointLights[0] = PointLight(0.5f, 0.5f, 0.5f,
+		3.3f, 1.3f,
+		-7.0f, 2.2f, 79.0f,
+		1.0f, 0.6f, 0.0f);
 	pointLightCount++;
 
 	// Pagoda lampara
@@ -681,6 +688,9 @@ int main()
 			gl += .01;
 		}
 		
+		if (mainWindow.getBanOnAnim() == true) {
+			rotMolino -= 0.3;
+		}
 
 		//Animación Avatar
 		if (rotLuc < 20 && gira == false && mainWindow.getBanOnAnim() == true) {
@@ -1568,20 +1578,6 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		//arbusto.RenderModel();
 
-
-		//##########################//
-		//####      Tronco      ####//
-		//##########################//
-		
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(10.0f + mainWindow.getposx(), 0.0f + mainWindow.getposy(), 10.0f ));
-		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
-		//model = glm::rotate(model, -90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Tronco.RenderModel();
-
-
-
 		//##########################//
 		//#### Lamapara Parque  ####//
 		//##########################//
@@ -1719,12 +1715,45 @@ int main()
 		//##########################//
 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(5.5f, -0.5f, 60.0f));
+		model = glm::translate(model, glm::vec3(7.2f, -0.7f, 60.0f));
 		model = glm::scale(model, glm::vec3(3.7f, 3.7f, 3.7f));
 		model = glm::rotate(model, 180 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		ViejoMolino.RenderModel();
 
+		//##########################//
+		//####    Molino Agua   ####//
+		//##########################//
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(36.2f, 11.5f, 87.0f));
+		model = glm::scale(model, glm::vec3(2.5f, 3.0f, 3.0f));
+		model = glm::rotate(model, rotMolino * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		MolinoAgua.RenderModel();
+
+		//##########################//
+		//####      Tronco      ####//
+		//##########################//
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-7.0f, -0.5f, 79.0f));
+		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+		model = glm::rotate(model, 111 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Tronco.RenderModel();
+
+
+		//##########################//
+		//#### Linterna Leñador ####//
+		//##########################//
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-7.1f, 2.0f, 79.1f));
+		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
+		model = glm::rotate(model, 80.0f * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		LinternaLenador.RenderModel();
 
 
 
