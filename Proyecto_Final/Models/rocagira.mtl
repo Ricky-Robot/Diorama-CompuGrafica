@@ -1,0 +1,46 @@
+# Blender 3.5.0 MTL File: 'None'
+# www.blender.org
+
+newmtl rock_mat.001
+Ka 1.000000 1.000000 1.000000
+Ks 0.177272 0.177272 0.177272
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd rock atlas.jpg
+map_Ns rock atlas roughness.png
+map_Bump -bm 1.000000 rock atlas normal.png
+
+newmtl rock_mat.002
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd rock atlas.jpg
+map_Ns rock atlas roughness.png
+map_Bump -bm 1.000000 rock atlas normal.png
+
+newmtl rock_mat.003
+Ka 1.000000 1.000000 1.000000
+Ks 0.154545 0.154545 0.154545
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd rock atlas.jpg
+map_Ns rock atlas roughness.png
+map_Bump -bm 1.000000 rock atlas normal.png
+
+newmtl rock_mat.004
+Ka 1.000000 1.000000 1.000000
+Ks 0.177272 0.177272 0.177272
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd rock atlas.jpg
+map_Ns rock atlas roughness.png
+map_Bump -bm 1.000000 rock atlas normal.png
