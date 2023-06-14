@@ -53,26 +53,6 @@ float toffsetu;
 float toffsetv;
 
 bool dia;
-float movVol;
-float movVolOffset;
-int rotVol;
-int rotVolOffset;
-bool arriba;
-float movOnix;
-float movOnixOffset;
-int rotOnix;
-int rotOnixOffset;
-bool avanzaOnix;
-float movXLuc;
-float movXLucOffset;
-float movZLuc;
-float movZLucOffset;
-int rotCuerLuc;
-int rotLuc;
-int rotLucOffset;
-bool avanza;
-bool gira;
-
 float glx;
 float gly;
 float glz;
@@ -121,8 +101,6 @@ Camera camIso;
 Texture toroideTexture;
 Texture plainTexture;
 Texture pisoTexture;
-Texture AgaveTexture;
-Texture humo;
 Texture estatua1Texture;
 Texture estatua2Texture;
 Texture estatua3Texture;
@@ -541,8 +519,6 @@ int main()
 	toroideTexture.LoadTextureA();
 	pisoTexture = Texture("Textures/piso.tga");
 	pisoTexture.LoadTextureA();
-	humo = Texture("Textures/humo.tga");
-	humo.LoadTextureA();
 	estatua1Texture = Texture("Textures/Estatua1.png");
 	estatua1Texture.LoadTextureA();
 	estatua2Texture = Texture("Textures/Estatua2.png");
@@ -551,37 +527,9 @@ int main()
 	estatua3Texture.LoadTextureA();
 	estatua4Texture = Texture("Textures/Estatua4.png");
 	estatua4Texture.LoadTextureA();
-
-
-	//Pueblo = Model();
-	//Pueblo.LoadModel("Models/PuebloCentro.obj");
 	Arboles = Model();
 	Arboles.LoadModel("Models/Arboles.obj");
-	//Voltorb = Model();
-	//Voltorb.LoadModel("Models/Voltorb.obj");
-	//Electrode = Model();
-	//Electrode.LoadModel("Models/Electrode.obj");
-	//Onix = Model();
-	//Onix.LoadModel("Models/Onix.obj");
 
-
-	/*
-	//Avatar
-	LucCuerpo = Model();
-	LucCuerpo.LoadModel("Models/LucarioCuerpo.obj");
-	LucCabeza = Model();
-	LucCabeza.LoadModel("Models/LucarioCabeza.obj");
-	LucCola = Model();
-	LucCola.LoadModel("Models/LucarioCola.obj");
-	LucBraDer = Model();
-	LucBraDer.LoadModel("Models/LucarioBraDer.obj");
-	LucBraIzq = Model();
-	LucBraIzq.LoadModel("Models/LucarioBraIzq.obj");
-	LucPierDer = Model();
-	LucPierDer.LoadModel("Models/LucarioPierDer.obj");
-	LucPierIzq = Model();
-	LucPierIzq.LoadModel("Models/LucarioPierIzq.obj");
-	*/
 
 
 	CasaParque = Model();
@@ -784,26 +732,24 @@ int main()
 	//GLuint uniformColor = 0;
 	//glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 1000.0f);
 	
-	//Inicialización de Variables de Animación
-	movVol = 0.0;
-	movVolOffset = 0.1;
-	rotVol = 0;
-	rotVolOffset = 5;
-	arriba = false;
-	movOnix = 90.0f;
-	movOnixOffset = 0.5f;
-	rotOnix = 0;
-	rotOnixOffset = 10;
-	avanzaOnix = false;
-	movXLuc = 0.0;
-	movXLucOffset = 0.1;
-	movZLuc = 0.0;
-	movZLucOffset = 0.1;
-	rotCuerLuc = 0;
-	rotLuc = 0;
-	rotLucOffset = 2;
-	avanza = false;
-	gira = false;
+	////Inicialización de Variables de Animación
+	//movVol = 0.0;
+	//movVolOffset = 0.1;
+	//rotVol = 0;
+	//rotVolOffset = 5;
+	//arriba = false;
+	//
+	//rotOnixOffset = 10;
+	//avanzaOnix = false;
+	//movXLuc = 0.0;
+	//movXLucOffset = 0.1;
+	//movZLuc = 0.0;
+	//movZLucOffset = 0.1;
+	//rotCuerLuc = 0;
+	//rotLuc = 0;
+	//rotLucOffset = 2;
+	//avanza = false;
+	/*gira = false;*/
 
 	rotColumpio = 0.0f;
 	rotColumpioOffset = 0.2f;
@@ -933,48 +879,6 @@ int main()
 			rotMolino -= 0.3;
 		}
 
-		//Animación Avatar
-		if (rotLuc < 20 && gira == false && mainWindow.getBanOnAnim() == true) {
-			rotLuc += rotLucOffset * deltaTime;
-			if (rotLuc < 21 && rotLuc > 19) {
-				gira = true;
-			}
-		}
-		else if (rotLuc > -20 && gira == true && mainWindow.getBanOnAnim() == true) {
-			rotLuc -= rotLucOffset * deltaTime;
-			if (rotLuc < -19 && rotLuc > -21) {
-				gira = false;
-			}
-		}
-
-
-		if (movXLuc < 100.5f && avanza == false && mainWindow.getBanOnAnim() == true) {
-			movXLuc += movXLucOffset * deltaTime;
-			if (movXLuc < 101.0f && movXLuc > 100.0f ) {
-				rotCuerLuc = 1;
-				avanza = true;
-			}
-		}
-		else if (movZLuc < 120.5f && rotCuerLuc == 1 && mainWindow.getBanOnAnim() == true) {
-			movZLuc += movVolOffset * deltaTime;
-			if (movZLuc < 121.0f && movZLuc > 120.0f) {
-				rotCuerLuc = 2;
-			}
-		}
-		else if (movXLuc > 0.0f && rotCuerLuc == 2 && mainWindow.getBanOnAnim() == true) {
-			movXLuc -= movXLucOffset * deltaTime;
-			if (movXLuc < 0.5f && movXLuc > -0.5f) {
-				rotCuerLuc = 3;
-			}
-		}
-		else if (movZLuc > 0.0f && rotCuerLuc == 3 && mainWindow.getBanOnAnim() == true) {
-			movZLuc -= movVolOffset * deltaTime;
-			if (movZLuc < 0.5f && movZLuc > -0.5f) {
-				rotCuerLuc = 0;
-				avanza = false;
-			}
-		}
-		
 		// ANIMACION SIMPLE: Columpio
 		if (mainWindow.getBanOnAnim()) { // Rota
 			if (rotColumpio < incRot && BanColumpio == true)
@@ -997,24 +901,6 @@ int main()
 			incRot = 0.0f;
 		}
 
-		// ANIMACION SIMPLE: Sube y Baja
-		if (mainWindow.getBanOnAnim()) { // Rota
-			if (rotSyB < 26.0f && BanSyB == true)
-				rotSyB += rotSyBOffset * deltaTime;
-			else if (rotSyB > 0.0f && BanSyB == false)
-				rotSyB -= rotSyBOffset * deltaTime;
-			else {
-				BanSyB = !BanSyB;
-			}
-		}
-		else { // Se detiene y regresa al punto incial
-			if (rotSyB < -0.1f) {
-				rotSyB += rotColumpioOffset * deltaTime;
-			}
-			else if (rotColumpio > 0.1f) {
-				rotSyB -= rotColumpioOffset * deltaTime;
-			}
-		}
 		//Animacion Mordecai
 		if (mainWindow.getBanOnAnim()) { // Rota
 			if (rotBrazoD < 50.0f && BanRegreso == false)
@@ -1071,17 +957,15 @@ int main()
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		//skyboxDia.DrawSkybox(camera.calculateViewMatrix(), projection);
-		//skyboxDia.DrawSkybox(camIso.calculateViewMatrix(), projection);
 
 		//Cambio entre día y noche
 		if (dia) {
-			skyboxDia.DrawSkybox(camera.calculateViewMatrix(), projection);
+			skyboxDia.DrawSkybox(camera.calculateViewMatrixPersonaje(), projection);
 			mainLight.SetInten(0.55f, 0.62f);
 			pointLightCount = 0;
 		}
 		else {
-			skyboxNoche.DrawSkybox(camera.calculateViewMatrix(), projection);
+			skyboxNoche.DrawSkybox(camera.calculateViewMatrixPersonaje(), projection);
 			mainLight.SetInten(0.2f, 0.2f);
 			pointLightCount = 3;
 		}
@@ -1116,11 +1000,6 @@ int main()
 			glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camIso.calculateViewMatrix()));
 			glUniform3f(uniformEyePosition, camIso.getCameraPosition().x, camIso.getCameraPosition().y, camIso.getCameraPosition().z);
 		}
-		//glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camIso.calculateViewMatrix()));
-		//glUniform3f(uniformEyePosition, camera.getCameraPosition().x, camera.getCameraPosition().y, camera.getCameraPosition().z);
-		//glUniform3f(uniformEyePosition, camIso.getCameraPosition().x, camIso.getCameraPosition().y, camIso.getCameraPosition().z);
-
-
 
 
 		//información al shader de fuentes de iluminación
@@ -1283,9 +1162,6 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Farola.RenderModel();
 
-		
-		
-		
 		//Farola Pagoda
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(50.0f , 0.0f, -10.0f));
@@ -1964,87 +1840,6 @@ int main()
 		cerezo.RenderModel();
 
 
-		//######################//
-		//#### Arbustos		####//
-		//######################//
-
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-115.0f + mainWindow.getposx(), 0.0f, 0.0f + mainWindow.getposy()));
-		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//arbusto.RenderModel();
-
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-115.0f + mainWindow.getposx(), 0.0f, 0.0f + mainWindow.getposy()));
-		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//arbusto.RenderModel();
-
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-115.0f + mainWindow.getposx(), 0.0f, 0.0f + mainWindow.getposy()));
-		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//arbusto.RenderModel();
-
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-115.0f + mainWindow.getposx(), 0.0f, 0.0f + mainWindow.getposy()));
-		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//arbusto.RenderModel();
-
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-115.0f + mainWindow.getposx(), 0.0f, 0.0f + mainWindow.getposy()));
-		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//arbusto.RenderModel();
-
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-115.0f + mainWindow.getposx(), 0.0f, 0.0f + mainWindow.getposy()));
-		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//arbusto.RenderModel();
-
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-115.0f + mainWindow.getposx(), 0.0f, 0.0f + mainWindow.getposy()));
-		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//arbusto.RenderModel();
-
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-115.0f + mainWindow.getposx(), 0.0f, 0.0f + mainWindow.getposy()));
-		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//arbusto.RenderModel();
-
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-115.0f + mainWindow.getposx(), 0.0f, 0.0f + mainWindow.getposy()));
-		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//arbusto.RenderModel();
-
-		//##########################//
-		//#### Lamapara Parque  ####//
-		//##########################//
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-115.0f + mainWindow.getposx(), 0.0f, 0.0f + mainWindow.getposy()));
-		model = glm::scale(model, glm::vec3(1.5f, 1.5f, 1.5f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//LamparaP.RenderModel();
-
-		//2
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-115.0f + mainWindow.getposx(), 0.0f, 0.0f + mainWindow.getposy()));
-		model = glm::scale(model, glm::vec3(1.5f, 1.5f, 1.5f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//LamparaP.RenderModel();
-
-		//3
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-115.0f + mainWindow.getposx(), 0.0f, 0.0f + mainWindow.getposy()));
-		model = glm::scale(model, glm::vec3(1.5f, 1.5f, 1.5f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//LamparaP.RenderModel();
-
 		//##########################//
 		//####      Bancas      ####//
 		//##########################//
@@ -2294,33 +2089,6 @@ int main()
 		estatua4Texture.UseTexture();
 		meshList[5]->RenderMesh();
 
-		//textura con movimiento del humo
-		//toffsetu += 0.001 * deltaTime;
-		//toffsetv += 0.0 * deltaTime;
-		//if (toffsetu > 1.0)
-		//	toffsetu = 0.0;
-		//toffset = glm::vec2(toffsetu, toffsetv);
-
-		//model = glm::mat4(1.0);
-		//model = glm::translate(model, glm::vec3(-21.972f, 28.592f, 3.27f));
-		//model = glm::rotate(model, -90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
-		//model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		//model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
-		//glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
-		//glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		////humo.UseTexture();
-		//Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		////meshList[4]->RenderMesh();
-
-		//model = glm::mat4(1.0);
-		//model = glm::translate(model, glm::vec3(-24.772f, 31.392f, 3.27f));
-		//model = glm::rotate(model, -90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
-		//model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		//model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
-		//glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
-		//glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		////humo.UseTexture();
-		////meshList[4]->RenderMesh();
 		//textura con movimiento
 		toffsetu += (0.0005 * sin(-3.14159 * 1.7 + deltaTime * 3));
 		toffsetv += 0.0005 * deltaTime;
