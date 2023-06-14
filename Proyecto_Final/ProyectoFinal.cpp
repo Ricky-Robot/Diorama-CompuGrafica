@@ -513,9 +513,10 @@ int main()
 		1.0f, 0.5f, 0.0f);
 	pointLightCount++;
 
+	// Pagoda lampara
 	pointLights[1] = PointLight(1.0f, 0.3f, 0.3f,
 		3.5f, 1.3f,
-		30.0f, 5.0f, 29.5f ,
+		50.0f, 5.0f, -9.5f ,
 		1.0f, 0.5f, 0.0f);
 	pointLightCount++;
 
@@ -865,8 +866,10 @@ int main()
 		//### Creacion del toroide ###
 		//############################
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-20.0f, 5.0f, 30.0f));
+		model = glm::translate(model, glm::vec3(32.0f, 0.3f, -51.0f));
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		toroideTexture.UseTexture();
 		meshList[5]->RenderMesh();
@@ -932,7 +935,7 @@ int main()
 		
 		//Farola Pagoda
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(30.0f , 0.0f, 30.0f));
+		model = glm::translate(model, glm::vec3(50.0f , 0.0f, -10.0f));
 		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		LamparaFarola.RenderModel();
@@ -1105,7 +1108,7 @@ int main()
 		//####      Puente      ####//
 		//##########################//
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(37.0f,0.4f, 0.0f));
+		model = glm::translate(model, glm::vec3(37.0f,0.4f, 40.0f));
 		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Puente.RenderModel();
@@ -1735,27 +1738,6 @@ int main()
 		if (toffsetu > 1.0)
 			toffsetu = 0.0;
 		toffset = glm::vec2(toffsetu, toffsetv);
-
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-21.972f, 28.592f, 3.27f));
-		model = glm::rotate(model, -90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
-		model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
-		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		humo.UseTexture();
-		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[4]->RenderMesh();
-
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-24.772f, 31.392f, 3.27f));
-		model = glm::rotate(model, -90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
-		model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
-		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		humo.UseTexture();
-		meshList[4]->RenderMesh();
 
 		//##########################//
 		//####         Rio      ####//
