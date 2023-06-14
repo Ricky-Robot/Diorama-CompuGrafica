@@ -507,7 +507,7 @@ int main()
 	CreateToroide();
 	CreateShaders();
 
-	camera = Camera(glm::vec3(-120.0f, 4.0f, 80.0f), glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, 0.0f, 0.2f, 0.2f);//Ligada al planoXZ
+	camera = Camera(glm::vec3(-90.0f, 4.0f, 80.0f), glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, 0.0f, 0.2f, 0.2f);//Ligada al planoXZ
 	camIso = Camera(glm::vec3(-150.0f, 150.0f, 150.0f), glm::vec3(0.0f, 1.0f, 0.0f), -45.0f, -45.0f, 0.5f, 0.5f);//Isometrica
 	
 	//Original
@@ -1099,9 +1099,7 @@ int main()
 		//############################
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(32.0f+arrastreRio+efecto, 0.3f+efecto, -51.0f+recorrido));
-		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
-
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		toroideTexture.UseTexture();
 		meshList[6]->RenderMesh();
