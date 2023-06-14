@@ -18,6 +18,7 @@ public:
 	GLfloat getposy() { return posZ; }
 	GLfloat getescale() { return escale; }
 	bool getBanOnAnim() { return BanOnAnim; }
+	bool getCambioCamara() { return cambioCamara; }
 	bool getImp() { return Imp; }
 	int getBanluz() { return luz; }
 	bool getShouldClose() {
@@ -41,6 +42,7 @@ private:
 	GLfloat posZ;
 	GLfloat escale;
 	bool BanOnAnim;
+	bool cambioCamara;
 	bool Imp;
 	int luz;
 	bool mouseFirstMoved;

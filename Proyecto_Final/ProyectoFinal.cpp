@@ -96,12 +96,10 @@ float rotBrazoIOffset;
 bool BanRegreso2;
 
 //key frames
-float levAang;
-float levRocs, inclRocs, giroRocs;
-float levEst;
 
 float rotMolino = 0;
 
+float reproduciranimacion, habilitaranimacion, reinicioFrame;
 bool animPersonaje;
 
 float arrastreRio = 0;
@@ -137,7 +135,6 @@ Model Fuente;
 Model cabaña1;
 Model cabaña2;
 Model Reja;
-Model Columpio;
 Model luciernaga;
 Model LamparaFarola;
 Model Entrada;
@@ -197,6 +194,8 @@ static const char* vShader = "shaders/shader_light.vert";
 // Fragment Shader
 static const char* fShader = "shaders/shader_light.frag";
 
+//PARA INPUT CON KEYFRAMES 
+void inputKeyframes(bool* keys);
 
 //cálculo del promedio de las normales para sombreado de Phong
 void calcAverageNormals(unsigned int* indices, unsigned int indiceCount, GLfloat* vertices, unsigned int verticeCount,
@@ -406,6 +405,118 @@ void CreateShaders()
 	shaderList.push_back(*shader1);
 }
 
+///////////////////////////////KEYFRAMES/////////////////////
+
+bool animacion = false;
+
+
+//NEW// Keyframes
+float posXkey = 0.0f, posYkey = 0.0f, posZkey = 0.0f;
+float levAang = 0.0f, levRocs = 0.0f, levEst = 0.0f;
+float inclRocs = 0, giroRocs = 0;
+
+#define MAX_FRAMES 25 //Numero de frames
+int i_max_steps = 100; //Interpolacion, mayor: fluida, menor: menos fluida
+int i_curr_steps = 32;
+
+typedef struct _frame
+{
+	//Variables para GUARDAR Key Frames
+	float levAang;		
+	float levRocs;		
+	float levEst;		
+	float levAang_Inc;	
+	float levRocs_Inc;	
+	float levEst_Inc;	
+	float inclRocs;		
+	float inclRocs_Inc;
+	float giroRocs;
+	float giroRocs_Inc;
+}FRAME;
+
+FRAME KeyFrame[MAX_FRAMES];
+int FrameIndex = 32;			//introducir datos
+bool play = false;
+int playIndex = 0;
+
+//
+//void saveFrame(void)
+//{
+//	printf("---------------------------------------\n");
+//	printf("Frameindex   = %d\n", FrameIndex);
+//	printf("i_curr_steps = %d\n", i_curr_steps);
+//
+//	KeyFrame[FrameIndex].levAang = levAang;
+//	KeyFrame[FrameIndex].movKey_y = movKey_z;
+//	KeyFrame[FrameIndex].movKey_z = movKey_z;
+//	KeyFrame[FrameIndex].giroKey = giroKey;
+//
+//	//Imprimir en una consola
+//	//printf("\nKeyFrame[%d].movKey_x = %f\n", FrameIndex, movKey_x);
+//	//printf("KeyFrame[%d].movKey_z = %f\n", FrameIndex, movKey_z);
+//	//printf("KeyFrame[%d].giroKey = %f\n", FrameIndex, giroKey);
+//
+//	FrameIndex++;
+//}
+
+void resetElements(void)
+{
+	levAang = KeyFrame[0].levAang;
+	levRocs = KeyFrame[0].levRocs;
+	levEst = KeyFrame[0].levEst;
+	inclRocs = KeyFrame[0].inclRocs;
+	giroRocs = KeyFrame[0].giroRocs;
+}
+
+void interpolation(void)
+{
+	KeyFrame[playIndex].levAang_Inc = (KeyFrame[playIndex + 1].levAang - KeyFrame[playIndex].levAang) / i_max_steps;
+	KeyFrame[playIndex].levRocs_Inc = (KeyFrame[playIndex + 1].levRocs - KeyFrame[playIndex].levRocs) / i_max_steps;
+	KeyFrame[playIndex].levEst_Inc = (KeyFrame[playIndex + 1].levEst - KeyFrame[playIndex].levEst) / i_max_steps;
+	KeyFrame[playIndex].inclRocs_Inc = (KeyFrame[playIndex + 1].inclRocs - KeyFrame[playIndex].inclRocs) / i_max_steps;
+	KeyFrame[playIndex].giroRocs_Inc = (KeyFrame[playIndex + 1].giroRocs - KeyFrame[playIndex].giroRocs) / i_max_steps;
+
+}
+
+
+void animate(void)
+{
+	//Movimiento del objeto
+	if (play)
+	{
+		if (i_curr_steps >= i_max_steps) //end of animation between frames?
+		{
+			playIndex++;
+			printf("playindex : %d\n", playIndex);
+			if (playIndex > FrameIndex - 2)	//end of total animation?
+			{
+				printf("Frame index= %d\n", FrameIndex);
+				printf("Termina animacion\n");
+				playIndex = 0;
+				play = false;
+			}
+			else //Next frame interpolations
+			{
+				i_curr_steps = 0; //Reset counter
+				//Interpolation
+				interpolation();
+			}
+		}
+		else
+		{
+			//Draw animation
+			levAang += KeyFrame[playIndex].levAang_Inc;
+			levRocs += KeyFrame[playIndex].levRocs_Inc;
+			levEst += KeyFrame[playIndex].levEst_Inc;
+			inclRocs += KeyFrame[playIndex].inclRocs_Inc;
+			giroRocs += KeyFrame[playIndex].giroRocs_Inc;
+			i_curr_steps++;
+		}
+
+	}
+}
+
+/* FIN KEYFRAMES*/
 
 
 int main()
@@ -419,7 +530,7 @@ int main()
 	CreateShaders();
 
 	camera = Camera(glm::vec3(-120.0f, 4.0f, 80.0f), glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, 0.0f, 0.2f, 0.2f);//Ligada al planoXZ
-	//camIso = Camera(glm::vec3(-150.0f, 150.0f, 150.0f), glm::vec3(0.0f, 1.0f, 0.0f), -45.0f, -45.0f, 0.5f, 0.5f);//Isometrica
+	camIso = Camera(glm::vec3(-150.0f, 150.0f, 150.0f), glm::vec3(0.0f, 1.0f, 0.0f), -45.0f, -45.0f, 0.5f, 0.5f);//Isometrica
 	
 	//Original
 	//camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.5f, 0.5f);
@@ -640,12 +751,38 @@ int main()
 		25.0f);
 	spotLightCount++;
 
-
-
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
-		uniformSpecularIntensity = 0, uniformShininess = 0, uniformTextureOffset=0;
-	GLuint uniformColor = 0;
-	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 1000.0f);
+   		uniformSpecularIntensity = 0, uniformShininess = 0, uniformTextureOffset=0;
+   	GLuint uniformColor = 0;
+   	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 1000.0f);
+   	
+   	//KEYFRAMES DECLARADOS INICIALES
+	KeyFrame[0].levAang = 0.0f;  KeyFrame[0].levRocs = 0.0f;	KeyFrame[0].levEst = 0.0f; KeyFrame[0].inclRocs = 0.0f;      KeyFrame[0].giroRocs = 0.0;
+	KeyFrame[1].levAang = 2.0f;  KeyFrame[1].levRocs = 1.5f;	KeyFrame[1].levEst = 1.5f; KeyFrame[1].inclRocs = 15.0;      KeyFrame[1].giroRocs = 20.0;
+	KeyFrame[2].levAang = 4.0f;  KeyFrame[2].levRocs = 3.5f;	KeyFrame[2].levEst = 5.5f; KeyFrame[2].inclRocs = 30.0;      KeyFrame[2].giroRocs = 40.0;
+	KeyFrame[4].levAang = 6.0f;  KeyFrame[3].levRocs = 5.5f;	KeyFrame[3].levEst = 5.5f; KeyFrame[3].inclRocs = 45.0;      KeyFrame[3].giroRocs = 60.0;
+	KeyFrame[3].levAang = 6.0f;  KeyFrame[4].levRocs = 7.5f;	KeyFrame[4].levEst = 7.5f; KeyFrame[4].inclRocs = 30.0;      KeyFrame[4].giroRocs = 80.0;
+	KeyFrame[5].levAang = 6.0f;  KeyFrame[5].levRocs = 7.5f;	KeyFrame[5].levEst = 6.5f; KeyFrame[5].inclRocs = 15.0;      KeyFrame[5].giroRocs = 100.0;
+	KeyFrame[6].levAang = 6.0f;  KeyFrame[6].levRocs = 7.5f;	KeyFrame[6].levEst = 7.5f; KeyFrame[6].inclRocs = 0.0;       KeyFrame[6].giroRocs = 20.0;
+	KeyFrame[7].levAang = 6.0f;  KeyFrame[7].levRocs = 7.5f;	KeyFrame[7].levEst = 6.5f; KeyFrame[7].inclRocs = -15.0;     KeyFrame[7].giroRocs = 140.0;
+	KeyFrame[8].levAang = 6.0f;  KeyFrame[8].levRocs = 7.5f;	KeyFrame[8].levEst = 7.5f; KeyFrame[8].inclRocs = -30.0;     KeyFrame[8].giroRocs = 160.0;
+	KeyFrame[9].levAang = 6.0f;  KeyFrame[9].levRocs = 7.5f;	KeyFrame[9].levEst = 6.5f; KeyFrame[9].inclRocs = -45.0;     KeyFrame[9].giroRocs = 180.0;
+	KeyFrame[10].levAang = 6.0f; KeyFrame[10].levRocs = 7.5f;	KeyFrame[10].levEst = 7.5f; KeyFrame[10].inclRocs = -30.0;   KeyFrame[10].giroRocs = 200.0;
+	KeyFrame[11].levAang = 6.0f; KeyFrame[11].levRocs = 7.5f;	KeyFrame[11].levEst = 6.5f; KeyFrame[11].inclRocs = -15.0;   KeyFrame[11].giroRocs = 220.0;
+	KeyFrame[12].levAang = 6.0f; KeyFrame[12].levRocs = 7.5f;	KeyFrame[12].levEst = 7.5f; KeyFrame[12].inclRocs = 0.0;     KeyFrame[12].giroRocs = 240.0;
+	KeyFrame[13].levAang = 6.0f; KeyFrame[13].levRocs = 7.5f;	KeyFrame[13].levEst = 6.5f; KeyFrame[13].inclRocs = 15.0;    KeyFrame[13].giroRocs = 260.0;
+	KeyFrame[14].levAang = 6.0f; KeyFrame[14].levRocs = 7.5f;	KeyFrame[14].levEst = 7.5f; KeyFrame[14].inclRocs = 30.0;    KeyFrame[14].giroRocs = 280.0;
+	KeyFrame[15].levAang = 6.0f; KeyFrame[15].levRocs = 7.5f;	KeyFrame[15].levEst = 6.5f; KeyFrame[15].inclRocs = 45.0;    KeyFrame[15].giroRocs = 300.0;
+	KeyFrame[16].levAang = 6.0f; KeyFrame[16].levRocs = 5.5f;	KeyFrame[16].levEst = 5.5f; KeyFrame[16].inclRocs = 30.0;    KeyFrame[16].giroRocs = 320.0;
+	KeyFrame[17].levAang = 4.0f; KeyFrame[17].levRocs = 3.5f;	KeyFrame[17].levEst = 3.5f; KeyFrame[17].inclRocs = 15.0;    KeyFrame[17].giroRocs = 340.0;
+	KeyFrame[18].levAang = 2.0f; KeyFrame[18].levRocs = 1.5f;	KeyFrame[18].levEst = 1.5f; KeyFrame[18].inclRocs = 0.0f;       KeyFrame[18].giroRocs = 360.0;
+	KeyFrame[19].levAang = 0.0f; KeyFrame[19].levRocs = 0.0f;	KeyFrame[19].levEst = 0.0f; KeyFrame[19].inclRocs = 0.0f;       KeyFrame[19].giroRocs = 0.0;
+
+
+	//GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
+	//	uniformSpecularIntensity = 0, uniformShininess = 0, uniformTextureOffset=0;
+	//GLuint uniformColor = 0;
+	//glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 1000.0f);
 	
 	//Inicialización de Variables de Animación
 	movVol = 0.0;
@@ -722,31 +859,44 @@ int main()
 
 	//______**Sonidos espaciales**______
 	// Fuente de agua
-	irrklang::vec3df position(-10.0f, 0.5f, -65.0f); //Posicion del audio
+	irrklang::vec3df position(-10.0f, 0.5f, -65.0f); //Posición del audio
 	irrklang::ISound* s_FuenteAgua = engine->play3D("Audios/Fuente_agua_sonido.mp3", position, true, false, true);
 	
 	if (s_FuenteAgua) { //Configuración
-		s_FuenteAgua->setMinDistance(1.0f); // Radio minimo distancia
+		s_FuenteAgua->setMinDistance(1.0f); // Radio minímo distancia
 		s_FuenteAgua->setVolume(0.2f); // Volumen del sonido ( 0 a 1)
 	}
 
 	//Tematica avatar
-	irrklang::vec3df position_AvatarA(50.0f, 0.5f, 0.0f); //Posicion del audio
+	irrklang::vec3df position_AvatarA(50.0f, 0.5f, 0.0f); //Posición del audio
 	irrklang::ISound* temploAvatar = engine->play3D("Audios/Invacion Palacio.mp3", position_AvatarA, true, false, true);
 
 	if (temploAvatar) { //Configuración
-		temploAvatar->setMinDistance(1.0f); // Radio minimo distancia
+		temploAvatar->setMinDistance(1.0f); // Radio mínimo distancia
 		temploAvatar->setVolume(1.0f); // Volumen del sonido ( 0 a 1)
 	}
 
-	irrklang::vec3df position_AvatarB(-45.0f, 0.5f, 0.0f); //Posicion del audio
+	irrklang::vec3df position_AvatarB(-45.0f, 0.5f, 0.0f); //Posición del audio
 	irrklang::ISound* flautasAvatarB = engine->play3D("Audios/Avatar Soundtrack End.mp3", position_AvatarB, true, false, true);
 
 	if (flautasAvatarB) { //Configuración
-		flautasAvatarB->setMinDistance(1.0f); // Radio minimo distancia
+		flautasAvatarB->setMinDistance(1.0f); // Radio mínimo distancia
 		flautasAvatarB->setVolume(0.8f); // Volumen del sonido ( 0 a 1)
 	}
 
+	//Tematica Más allá del jardín
+	irrklang::vec3df position_g(7.2f, -0.7f, 70.0f); //Posición del audio
+	irrklang::ISound* molino_sound = engine->play3D("Audios/Over_The_Garden_Wall.mp3", position_g, true, false, true);
+
+	if (molino_sound) { //Configuración
+		molino_sound->setMinDistance(1.0f); // Radio mínimo distancia
+		molino_sound->setVolume(0.8f); // Volumen del sonido ( 0 a 1)
+	}
+
+	// Para la cámara XY
+	glm::vec3 coordenadasM = glm::vec3(0.0f, 0.0f, 0.0f);
+	
+	
 	////Loop mientras no se cierra la ventana
 	while (!mainWindow.getShouldClose())
 	{
@@ -899,11 +1049,23 @@ int main()
 
 		//Recibir eventos del usuario
 		glfwPollEvents();
-		animPersonaje = camera.keyControl(mainWindow.getsKeys(), deltaTime);
-		camera.mouseControl(mainWindow.getXChange(), 0.0f);
+
+		if (mainWindow.getCambioCamara() == false) {
+			animPersonaje = camera.keyControlPersonaje(mainWindow.getsKeys(), deltaTime);
+			camera.mouseControlPersonaje(mainWindow.getXChange(), 0.0f);
+		}
+		else {
+			camIso.keyControl(mainWindow.getsKeys(), deltaTime);
+			camIso.mouseControl(0.0f, 0.0f);
+		}
+		
+		//para keyframes
+		inputKeyframes(mainWindow.getsKeys());
+		animate();
 		//camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
 		//camIso.keyControl(mainWindow.getsKeys(), deltaTime);
 		//camIso.mouseControl(0.0f, 0.0f);
+
 
 		// Clear the window
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -944,11 +1106,21 @@ int main()
 		uniformSpecularIntensity = shaderList[0].GetSpecularIntensityLocation();
 		uniformShininess = shaderList[0].GetShininessLocation();
 
-		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
-		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
+		if (mainWindow.getCambioCamara() == false) {
+			glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
+			glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrixPersonaje()));
+			glUniform3f(uniformEyePosition, camera.getCameraPosition().x, camera.getCameraPosition().y, camera.getCameraPosition().z);
+		}
+		else {
+			glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
+			glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camIso.calculateViewMatrix()));
+			glUniform3f(uniformEyePosition, camIso.getCameraPosition().x, camIso.getCameraPosition().y, camIso.getCameraPosition().z);
+		}
 		//glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camIso.calculateViewMatrix()));
-		glUniform3f(uniformEyePosition, camera.getCameraPosition().x, camera.getCameraPosition().y, camera.getCameraPosition().z);
+		//glUniform3f(uniformEyePosition, camera.getCameraPosition().x, camera.getCameraPosition().y, camera.getCameraPosition().z);
 		//glUniform3f(uniformEyePosition, camIso.getCameraPosition().x, camIso.getCameraPosition().y, camIso.getCameraPosition().z);
+
+
 
 
 		//información al shader de fuentes de iluminación
@@ -982,7 +1154,7 @@ int main()
 			if (soundtrack->getVolume() > 0.025f || soundtrack->getVolume() < -0.001f)
 				soundtrack->setVolume(soundtrack->getVolume() - soundtrack->getVolume());
 
-			if (temploAvatar->getIsPaused() && flautasAvatarB->getIsPaused()) {
+			if (temploAvatar->getIsPaused() && flautasAvatarB->getIsPaused() && molino_sound->getIsPaused()) {
 				if (soundtrack->getVolume() <= 0.015f)
 					soundtrack->setVolume(soundtrack->getVolume() + 0.0005f * deltaTime);
 			}
@@ -1013,6 +1185,18 @@ int main()
 			}
 			else {
 				flautasAvatarB->setIsPaused(false);
+			}
+		}
+		
+		//Lógica de audio3
+		if (molino_sound) {
+			poss = molino_sound->getPosition();
+			dist = sqrt(pow(poss.X - positionL.x, 2) + pow(poss.Y - positionL.y, 2) + pow(poss.Z - positionL.z, 2));
+			if (dist > 60) {
+				molino_sound->setIsPaused(true);
+			}
+			else {
+				molino_sound->setIsPaused(false);
 			}
 		}
 		//############
@@ -1049,7 +1233,7 @@ int main()
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		//model = glm::rotate(model, 180 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//Arboles.RenderModel();
+		Arboles.RenderModel();
 
 		//Arboles
 		model = glm::mat4(1.0);
@@ -1065,7 +1249,7 @@ int main()
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//Arboles.RenderModel();
+		Arboles.RenderModel();
 
 		//Arboles
 		model = glm::mat4(1.0);
@@ -1929,8 +2113,15 @@ int main()
 		//#####################################//
 		//#### Greg - Personaje Principal #####//
 		//#####################################//
+
+		glm::vec3 posicionPersonaje = glm::vec3(camera.getCameraPosition().x, 2.2f, -9.0f + 9.0f + camera.getCameraPosition().z);
+
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(camera.getCameraPosition().x, 2.2f, 9.0f + camera.getCameraPosition().z));
+
+		model = glm::translate(model, glm::vec3(camera.getCameraPosition().x, 2.2f, camera.getCameraPosition().z));
+		model = glm::rotate(model, -90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, -camera.rotCamara() * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		modelaux = model;
 		model = glm::scale(model, glm::vec3(0.7f, 0.7f, 0.7f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		GregCuerpo.RenderModel();
@@ -1954,34 +2145,33 @@ int main()
 			}
 		}
 
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-0.35f + camera.getCameraPosition().x, 1.8f, 8.91f + camera.getCameraPosition().z));
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-0.35f, -0.4f, -0.09f));
 		model = glm::scale(model, glm::vec3(0.7f, 0.7f, 0.7f));
 		model = glm::rotate(model, rotBrazoDerPiernaIzq * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		GregBrazoDer.RenderModel();
 
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(0.35f + camera.getCameraPosition().x, 1.8f, 8.91f + camera.getCameraPosition().z));
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(0.35f, -0.4f, -0.09f));
 		model = glm::scale(model, glm::vec3(0.7f, 0.7f, 0.7f));
 		model = glm::rotate(model, rotBrazoIzqPiernaDer * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		GregBrazoIzq.RenderModel();
 
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(0.387f + camera.getCameraPosition().x, 0.7f, 9.128f + camera.getCameraPosition().z));
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(0.387f, -1.5f, 0.128f));
 		model = glm::scale(model, glm::vec3(0.7f, 0.7f, 0.7f));
 		model = glm::rotate(model, rotBrazoDerPiernaIzq * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		GregPiernaIzq.RenderModel();
 
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-0.387f + camera.getCameraPosition().x, 0.7f, 9.128f + camera.getCameraPosition().z));
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-0.387f, -1.5f, 0.128f));
 		model = glm::scale(model, glm::vec3(0.7f, 0.7f, 0.7f));
 		model = glm::rotate(model, rotBrazoIzqPiernaDer * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		GregPiernaDer.RenderModel();
-
 
 
 		//##########################//
@@ -2159,6 +2349,42 @@ int main()
 	engine->drop(); //Eliminar audios
 	return 0;
 }
+
+void inputKeyframes(bool* keys)
+{
+	if (keys[GLFW_KEY_SPACE])
+	{
+		if (reproduciranimacion < 1)
+		{
+			if (play == false && (FrameIndex > 1))
+			{
+				resetElements();
+				//First Interpolation				
+				interpolation();
+				play = true;
+				playIndex = 0;
+				i_curr_steps = 0;
+				reproduciranimacion++;
+				printf("\n *--- Presiona R para habilitar reproducir de nuevo la animación ---*\n");
+				habilitaranimacion = 0;
+
+			}
+			else
+			{
+				play = false;
+			}
+		}
+	}
+	if (keys[GLFW_KEY_R])
+	{
+		if (habilitaranimacion < 1)
+		{
+			reproduciranimacion = 0;
+		}
+	}
+}
+
+//Fin
 
 
 

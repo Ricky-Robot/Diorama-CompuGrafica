@@ -83,15 +83,30 @@ float rotColumpioOffset, rotSyBOffset;
 bool BanColumpio, BanSyB;
 float incRot;
 
-float rotBrazos = 0;
-bool dirBrazos = false;
+float rotBrazoIzqPiernaDer = 0;
+float rotBrazoDerPiernaIzq = 0;
+bool dirBrazosPiernas = false;
+
+float rotBrazoD;
+float rotBrazoDOffset;
+bool BanRegreso;
+
+float rotBrazoI;
+float rotBrazoIOffset;
+bool BanRegreso2;
 
 //key frames
-float levAang;
-float levRocs, inclRocs, giroRocs;
-float levEst;
+//float levAang;
+//float levRocs, inclRocs, giroRocs;
+//float levEst;
 
 float rotMolino = 0;
+
+bool animPersonaje;
+
+float arrastreRio = 0;
+float efecto = 0;
+float recorrido = 0;
 
 //Banderas
 int bandia = 0;
@@ -110,7 +125,10 @@ Texture plainTexture;
 Texture pisoTexture;
 Texture AgaveTexture;
 Texture humo;
-
+Texture estatua1Texture;
+Texture estatua2Texture;
+Texture estatua3Texture;
+Texture estatua4Texture;
 
 
 Model Arboles;
@@ -135,14 +153,21 @@ Model Tronco;
 Model GregCuerpo;
 Model GregBrazoIzq;
 Model GregBrazoDer;
+Model GregPiernaIzq;
+Model GregPiernaDer;
+
 Model Rio;
 Model ViejoMolino;
 Model MolinoAgua;
 Model LinternaLenador;
 
+Model Arbol_col;
+Model Columpio;
+
 //Model Casa2;
-Model Personaje2;
-Model arbol;
+Model MordecaiCuerpo;
+Model MordecaiBrazoIzq;
+Model MordecaiBrazoDer;Model arbol;
 Model arbusto;
 Model cerezo;
 Model LamparaP;
@@ -172,6 +197,8 @@ static const char* vShader = "shaders/shader_light.vert";
 // Fragment Shader
 static const char* fShader = "shaders/shader_light.frag";
 
+//PARA INPUT CON KEYFRAMES 
+void inputKeyframes(bool* keys);
 
 //cálculo del promedio de las normales para sombreado de Phong
 void calcAverageNormals(unsigned int* indices, unsigned int indiceCount, GLfloat* vertices, unsigned int verticeCount,
@@ -266,6 +293,18 @@ void CreateObjects()
 
 	};
 
+	unsigned int estatuaIndices[] = {
+	   0, 1, 2,
+	   0, 2, 3,
+	};
+
+	GLfloat estatuaVertices[] = {
+		-0.5f, 0.0f, 0.5f,		0.0f, 0.0f,		0.0f, -1.0f, 0.0f,
+		0.5f, 0.0f, 0.5f,		1.0f, 0.0f,		0.0f, -1.0f, 0.0f,
+		0.5f, 0.0f, -0.5f,		1.0f, 1.0f,		0.0f, -1.0f, 0.0f,
+		-0.5f, 0.0f, -0.5f,		0.0f, 1.0f,		0.0f, -1.0f, 0.0f,
+
+	};
 	Mesh *obj1 = new Mesh();
 	obj1->CreateMesh(vertices, indices, 32, 12);
 	meshList.push_back(obj1);
@@ -287,7 +326,9 @@ void CreateObjects()
 	obj5->CreateMesh(flechaVertices, flechaIndices, 32, 6);
 	meshList.push_back(obj5);
 
-
+	Mesh* obj6 = new Mesh();
+	obj6->CreateMesh(estatuaVertices, estatuaIndices, 32, 6);
+	meshList.push_back(obj6);
 }
 
 void CreateToroide() {
@@ -367,6 +408,118 @@ void CreateShaders()
 	shaderList.push_back(*shader1);
 }
 
+///////////////////////////////KEYFRAMES/////////////////////
+
+bool animacion = false;
+
+
+//NEW// Keyframes
+float posXkey = 0.0f, posYkey = 0.0f, posZkey = 0.0f;
+float levAang = 0.0f, levRocs = 0.0f, levEst = 0.0f;
+float inclRocs = 0, giroRocs = 0;
+
+#define MAX_FRAMES 25 //Numero de frames
+int i_max_steps = 100; //Interpolacion, mayor: fluida, menor: menos fluida
+int i_curr_steps = 32;
+
+typedef struct _frame
+{
+	//Variables para GUARDAR Key Frames
+	float levAang;		
+	float levRocs;		
+	float levEst;		
+	float levAang_Inc;	
+	float levRocs_Inc;	
+	float levEst_Inc;	
+	float inclRocs;		
+	float inclRocs_Inc;
+	float giroRocs;
+	float giroRocs_Inc;
+}FRAME;
+
+FRAME KeyFrame[MAX_FRAMES];
+int FrameIndex = 32;			//introducir datos
+bool play = false;
+int playIndex = 0;
+
+//
+//void saveFrame(void)
+//{
+//	printf("---------------------------------------\n");
+//	printf("Frameindex   = %d\n", FrameIndex);
+//	printf("i_curr_steps = %d\n", i_curr_steps);
+//
+//	KeyFrame[FrameIndex].levAang = levAang;
+//	KeyFrame[FrameIndex].movKey_y = movKey_z;
+//	KeyFrame[FrameIndex].movKey_z = movKey_z;
+//	KeyFrame[FrameIndex].giroKey = giroKey;
+//
+//	//Imprimir en una consola
+//	//printf("\nKeyFrame[%d].movKey_x = %f\n", FrameIndex, movKey_x);
+//	//printf("KeyFrame[%d].movKey_z = %f\n", FrameIndex, movKey_z);
+//	//printf("KeyFrame[%d].giroKey = %f\n", FrameIndex, giroKey);
+//
+//	FrameIndex++;
+//}
+
+void resetElements(void)
+{
+	levAang = KeyFrame[0].levAang;
+	levRocs = KeyFrame[0].levRocs;
+	levEst = KeyFrame[0].levEst;
+	inclRocs = KeyFrame[0].inclRocs;
+	giroRocs = KeyFrame[0].giroRocs;
+}
+
+void interpolation(void)
+{
+	KeyFrame[playIndex].levAang_Inc = (KeyFrame[playIndex + 1].levAang - KeyFrame[playIndex].levAang) / i_max_steps;
+	KeyFrame[playIndex].levRocs_Inc = (KeyFrame[playIndex + 1].levRocs - KeyFrame[playIndex].levRocs) / i_max_steps;
+	KeyFrame[playIndex].levEst_Inc = (KeyFrame[playIndex + 1].levEst - KeyFrame[playIndex].levEst) / i_max_steps;
+	KeyFrame[playIndex].inclRocs_Inc = (KeyFrame[playIndex + 1].inclRocs - KeyFrame[playIndex].inclRocs) / i_max_steps;
+	KeyFrame[playIndex].giroRocs_Inc = (KeyFrame[playIndex + 1].giroRocs - KeyFrame[playIndex].giroRocs) / i_max_steps;
+
+}
+
+
+void animate(void)
+{
+	//Movimiento del objeto
+	if (play)
+	{
+		if (i_curr_steps >= i_max_steps) //end of animation between frames?
+		{
+			playIndex++;
+			printf("playindex : %d\n", playIndex);
+			if (playIndex > FrameIndex - 2)	//end of total animation?
+			{
+				printf("Frame index= %d\n", FrameIndex);
+				printf("Termina animacion\n");
+				playIndex = 0;
+				play = false;
+			}
+			else //Next frame interpolations
+			{
+				i_curr_steps = 0; //Reset counter
+				//Interpolation
+				interpolation();
+			}
+		}
+		else
+		{
+			//Draw animation
+			levAang += KeyFrame[playIndex].levAang_Inc;
+			levRocs += KeyFrame[playIndex].levRocs_Inc;
+			levEst += KeyFrame[playIndex].levEst_Inc;
+			inclRocs += KeyFrame[playIndex].inclRocs_Inc;
+			giroRocs += KeyFrame[playIndex].giroRocs_Inc;
+			i_curr_steps++;
+		}
+
+	}
+}
+
+/* FIN KEYFRAMES*/
 
 
 int main()
@@ -379,8 +532,8 @@ int main()
 	CreateToroide();
 	CreateShaders();
 
-	camera = Camera(glm::vec3(-120.0f, 4.0f, 100.0f), glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, 0.0f, 0.5f, 0.5f);//Ligada al planoXZ
-	//camIso = Camera(glm::vec3(-150.0f, 150.0f, 150.0f), glm::vec3(0.0f, 1.0f, 0.0f), -45.0f, -45.0f, 0.5f, 0.5f);//Isometrica
+	camera = Camera(glm::vec3(-120.0f, 4.0f, 80.0f), glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, 0.0f, 0.2f, 0.2f);//Ligada al planoXZ
+	camIso = Camera(glm::vec3(-150.0f, 150.0f, 150.0f), glm::vec3(0.0f, 1.0f, 0.0f), -45.0f, -45.0f, 0.5f, 0.5f);//Isometrica
 	
 	//Original
 	//camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.5f, 0.5f);
@@ -391,10 +544,16 @@ int main()
 	toroideTexture.LoadTextureA();
 	pisoTexture = Texture("Textures/piso.tga");
 	pisoTexture.LoadTextureA();
-	AgaveTexture = Texture("Textures/Agave.tga");
-	AgaveTexture.LoadTextureA();
 	humo = Texture("Textures/humo.tga");
 	humo.LoadTextureA();
+	estatua1Texture = Texture("Textures/Estatua1.png");
+	estatua1Texture.LoadTextureA();
+	estatua2Texture = Texture("Textures/Estatua2.png");
+	estatua2Texture.LoadTextureA();
+	estatua3Texture = Texture("Textures/Estatua3.png");
+	estatua3Texture.LoadTextureA();
+	estatua4Texture = Texture("Textures/Estatua4.png");
+	estatua4Texture.LoadTextureA();
 
 
 	//Pueblo = Model();
@@ -446,8 +605,6 @@ int main()
 	Reja.LoadModel("Models/Reja.obj");
 	Entrada = Model();
 	Entrada.LoadModel("Models/Entrada.obj");
-	Personaje2 = Model();
-	Personaje2.LoadModel("Models/Mordecai.obj");
 	arbol = Model();
 	arbol.LoadModel("Models/Arbol2.obj");
 	arbusto = Model();
@@ -472,12 +629,19 @@ int main()
 	LamparaFarola.LoadModel("Models/lampara.obj");
 	luciernaga = Model();
 	luciernaga.LoadModel("Models/Luciernaga.obj");
+
 	GregCuerpo = Model();
-	GregCuerpo.LoadModel("Models/GregCuerpoTemp.obj");
+	GregCuerpo.LoadModel("Models/GregCuerpo.obj");
 	GregBrazoIzq = Model();
 	GregBrazoIzq.LoadModel("Models/GregBrazoIzq.obj");
 	GregBrazoDer = Model();
 	GregBrazoDer.LoadModel("Models/GregBrazoDer.obj");
+	GregPiernaIzq = Model();
+	GregPiernaIzq.LoadModel("Models/GregPiernaIzq.obj");
+	GregPiernaDer = Model();
+	GregPiernaDer.LoadModel("Models/GregPiernaDer.obj");
+
+
 	Rio = Model();
 	Rio.LoadModel("Models/rio.obj");
 	ViejoMolino = Model();
@@ -494,8 +658,16 @@ int main()
 	MolinoAgua.LoadModel("Models/MolinoAgua.obj");
 	LinternaLenador = Model();
 	LinternaLenador.LoadModel("Models/LinternaLenador.obj");
-
-
+	MordecaiCuerpo = Model();
+	MordecaiCuerpo.LoadModel("Models/MordecaiCuerpo.obj");
+	MordecaiBrazoDer = Model();
+	MordecaiBrazoDer.LoadModel("Models/MordecaiBrazoDer.obj");
+	MordecaiBrazoIzq = Model();
+	MordecaiBrazoIzq.LoadModel("Models/MordecaiBrazoIzq.obj");
+	Arbol_col = Model();
+	Arbol_col.LoadModel("Models/arbol_columpio.obj");
+	Columpio = Model();
+	Columpio.LoadModel("Models/columpio.obj");
 	std::vector<std::string> skyboxFacesDia;
 
 	skyboxFacesDia.push_back("Textures/Skybox/Day-Skybox_rt.tga");
@@ -582,12 +754,38 @@ int main()
 		25.0f);
 	spotLightCount++;
 
-
-
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
-		uniformSpecularIntensity = 0, uniformShininess = 0, uniformTextureOffset=0;
-	GLuint uniformColor = 0;
-	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 1000.0f);
+   		uniformSpecularIntensity = 0, uniformShininess = 0, uniformTextureOffset=0;
+   	GLuint uniformColor = 0;
+   	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 1000.0f);
+   	
+   	//KEYFRAMES DECLARADOS INICIALES
+	KeyFrame[0].levAang = 0.0f;  KeyFrame[0].levRocs = 0.0f;	KeyFrame[0].levEst = 0.0f; KeyFrame[0].inclRocs = 0.0f;      KeyFrame[0].giroRocs = 0.0;
+	KeyFrame[1].levAang = 2.0f;  KeyFrame[1].levRocs = 1.5f;	KeyFrame[1].levEst = 1.5f; KeyFrame[1].inclRocs = 15.0;      KeyFrame[1].giroRocs = 20.0;
+	KeyFrame[2].levAang = 4.0f;  KeyFrame[2].levRocs = 3.5f;	KeyFrame[2].levEst = 5.5f; KeyFrame[2].inclRocs = 30.0;      KeyFrame[2].giroRocs = 40.0;
+	KeyFrame[4].levAang = 6.0f;  KeyFrame[3].levRocs = 5.5f;	KeyFrame[3].levEst = 5.5f; KeyFrame[3].inclRocs = 45.0;      KeyFrame[3].giroRocs = 60.0;
+	KeyFrame[3].levAang = 6.0f;  KeyFrame[4].levRocs = 7.5f;	KeyFrame[4].levEst = 7.5f; KeyFrame[4].inclRocs = 30.0;      KeyFrame[4].giroRocs = 80.0;
+	KeyFrame[5].levAang = 6.0f;  KeyFrame[5].levRocs = 7.5f;	KeyFrame[5].levEst = 6.5f; KeyFrame[5].inclRocs = 15.0;      KeyFrame[5].giroRocs = 100.0;
+	KeyFrame[6].levAang = 6.0f;  KeyFrame[6].levRocs = 7.5f;	KeyFrame[6].levEst = 7.5f; KeyFrame[6].inclRocs = 0.0;       KeyFrame[6].giroRocs = 20.0;
+	KeyFrame[7].levAang = 6.0f;  KeyFrame[7].levRocs = 7.5f;	KeyFrame[7].levEst = 6.5f; KeyFrame[7].inclRocs = -15.0;     KeyFrame[7].giroRocs = 140.0;
+	KeyFrame[8].levAang = 6.0f;  KeyFrame[8].levRocs = 7.5f;	KeyFrame[8].levEst = 7.5f; KeyFrame[8].inclRocs = -30.0;     KeyFrame[8].giroRocs = 160.0;
+	KeyFrame[9].levAang = 6.0f;  KeyFrame[9].levRocs = 7.5f;	KeyFrame[9].levEst = 6.5f; KeyFrame[9].inclRocs = -45.0;     KeyFrame[9].giroRocs = 180.0;
+	KeyFrame[10].levAang = 6.0f; KeyFrame[10].levRocs = 7.5f;	KeyFrame[10].levEst = 7.5f; KeyFrame[10].inclRocs = -30.0;   KeyFrame[10].giroRocs = 200.0;
+	KeyFrame[11].levAang = 6.0f; KeyFrame[11].levRocs = 7.5f;	KeyFrame[11].levEst = 6.5f; KeyFrame[11].inclRocs = -15.0;   KeyFrame[11].giroRocs = 220.0;
+	KeyFrame[12].levAang = 6.0f; KeyFrame[12].levRocs = 7.5f;	KeyFrame[12].levEst = 7.5f; KeyFrame[12].inclRocs = 0.0;     KeyFrame[12].giroRocs = 240.0;
+	KeyFrame[13].levAang = 6.0f; KeyFrame[13].levRocs = 7.5f;	KeyFrame[13].levEst = 6.5f; KeyFrame[13].inclRocs = 15.0;    KeyFrame[13].giroRocs = 260.0;
+	KeyFrame[14].levAang = 6.0f; KeyFrame[14].levRocs = 7.5f;	KeyFrame[14].levEst = 7.5f; KeyFrame[14].inclRocs = 30.0;    KeyFrame[14].giroRocs = 280.0;
+	KeyFrame[15].levAang = 6.0f; KeyFrame[15].levRocs = 7.5f;	KeyFrame[15].levEst = 6.5f; KeyFrame[15].inclRocs = 45.0;    KeyFrame[15].giroRocs = 300.0;
+	KeyFrame[16].levAang = 6.0f; KeyFrame[16].levRocs = 5.5f;	KeyFrame[16].levEst = 5.5f; KeyFrame[16].inclRocs = 30.0;    KeyFrame[16].giroRocs = 320.0;
+	KeyFrame[17].levAang = 4.0f; KeyFrame[17].levRocs = 3.5f;	KeyFrame[17].levEst = 3.5f; KeyFrame[17].inclRocs = 15.0;    KeyFrame[17].giroRocs = 340.0;
+	KeyFrame[18].levAang = 2.0f; KeyFrame[18].levRocs = 1.5f;	KeyFrame[18].levEst = 1.5f; KeyFrame[18].inclRocs = 0.0f;       KeyFrame[18].giroRocs = 360.0;
+	KeyFrame[19].levAang = 0.0f; KeyFrame[19].levRocs = 0.0f;	KeyFrame[19].levEst = 0.0f; KeyFrame[19].inclRocs = 0.0f;       KeyFrame[19].giroRocs = 0.0;
+
+
+	//GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
+	//	uniformSpecularIntensity = 0, uniformShininess = 0, uniformTextureOffset=0;
+	//GLuint uniformColor = 0;
+	//glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 1000.0f);
 	
 	//Inicialización de Variables de Animación
 	movVol = 0.0;
@@ -621,6 +819,15 @@ int main()
 	gly = 1.0f;
 	glz = 1.0f;
 	gl = 1.0f;
+	
+	//Variables para animación de Mordecai
+	rotBrazoD = 0.0;
+	rotBrazoDOffset = 1.0;
+	BanRegreso = false;
+	
+	rotBrazoI = 0.0;
+	rotBrazoIOffset = 1.0;
+	BanRegreso2 = false;
 
 	//key frames
 	levAang = levEst = levRocs = 0.0f;
@@ -638,46 +845,61 @@ int main()
 	if (!engine) //Se verifica si se pudo cargar el motor
 		return 0;
 
+	//variables
+	irrklang::vec3df poss(0.0f, 0.0f, 0.0f);
+	float dist = 0.0f;
 	//#############################################################
 	//#### Aquí van las declaraciones de los diferentes audios ####
 	//#############################################################
 
 	//_______**Soundtrack** _______
 	irrklang::ISound* soundtrack = engine->play2D("Audios/Owns_Battle-Avatar_Soundtrack.mp3", true, false, true);
-	//Radio de sonido
 	//Soundtrack
 	if (soundtrack) {
 		soundtrack->setPan(0); // Se escucha al centro de las bocinas
-		soundtrack->setVolume(0.05f); // Volumen del soundtrack
+		soundtrack->setVolume(0.0f); // Volumen del soundtrack
 	}
 
 	//______**Sonidos espaciales**______
 	// Fuente de agua
-	irrklang::vec3df position(-10.0f, 0.5f, -65.0f); //Posicion del audio
+	irrklang::vec3df position(-10.0f, 0.5f, -65.0f); //Posición del audio
 	irrklang::ISound* s_FuenteAgua = engine->play3D("Audios/Fuente_agua_sonido.mp3", position, true, false, true);
 	
 	if (s_FuenteAgua) { //Configuración
-		s_FuenteAgua->setMinDistance(2.0f); // Radio minimo distancia
-		s_FuenteAgua->setVolume(1.0f); // Volumen del sonido ( 0 a 1)
+		s_FuenteAgua->setMinDistance(1.0f); // Radio minímo distancia
+		s_FuenteAgua->setVolume(0.2f); // Volumen del sonido ( 0 a 1)
 	}
 
 	//Tematica avatar
-	irrklang::vec3df position_AvatarA(80.0f, 0.5f, 0.0f); //Posicion del audio
+	irrklang::vec3df position_AvatarA(50.0f, 0.5f, 0.0f); //Posición del audio
 	irrklang::ISound* temploAvatar = engine->play3D("Audios/Invacion Palacio.mp3", position_AvatarA, true, false, true);
 
 	if (temploAvatar) { //Configuración
-		temploAvatar->setMinDistance(16.0f); // Radio minimo distancia
+		temploAvatar->setMinDistance(1.0f); // Radio mínimo distancia
 		temploAvatar->setVolume(1.0f); // Volumen del sonido ( 0 a 1)
 	}
 
-	irrklang::vec3df position_AvatarB(-45.0f, 0.5f, 0.0f); //Posicion del audio
+	irrklang::vec3df position_AvatarB(-45.0f, 0.5f, 0.0f); //Posición del audio
 	irrklang::ISound* flautasAvatarB = engine->play3D("Audios/Avatar Soundtrack End.mp3", position_AvatarB, true, false, true);
 
 	if (flautasAvatarB) { //Configuración
-		flautasAvatarB->setMinDistance(11.0f); // Radio minimo distancia
-		flautasAvatarB->setVolume(1.0f); // Volumen del sonido ( 0 a 1)
+		flautasAvatarB->setMinDistance(1.0f); // Radio mínimo distancia
+		flautasAvatarB->setVolume(0.8f); // Volumen del sonido ( 0 a 1)
 	}
 
+	//Tematica Más allá del jardín
+	irrklang::vec3df position_g(7.2f, -0.7f, 70.0f); //Posición del audio
+	irrklang::ISound* molino_sound = engine->play3D("Audios/Over_The_Garden_Wall.mp3", position_g, true, false, true);
+
+	if (molino_sound) { //Configuración
+		molino_sound->setMinDistance(1.0f); // Radio mínimo distancia
+		molino_sound->setVolume(0.8f); // Volumen del sonido ( 0 a 1)
+	}
+
+	// Para la cámara XY
+	glm::vec3 coordenadasM = glm::vec3(0.0f, 0.0f, 0.0f);
+	
+	
 	////Loop mientras no se cierra la ventana
 	while (!mainWindow.getShouldClose())
 	{
@@ -796,15 +1018,59 @@ int main()
 				rotSyB -= rotColumpioOffset * deltaTime;
 			}
 		}
+		//Animacion Mordecai
+		if (mainWindow.getBanOnAnim()) { // Rota
+			if (rotBrazoD < 50.0f && BanRegreso == false)
+				rotBrazoD += rotBrazoDOffset * deltaTime;
+			else if (rotBrazoD > -0.01f && BanRegreso == true)
+				rotBrazoD -= rotBrazoDOffset * deltaTime;
+			else {
+				BanRegreso = !BanRegreso;
+			}
+		}
 
+		if (mainWindow.getBanOnAnim()) { // Rota
+			if (rotBrazoI < 0.10f && BanRegreso2 == false)
+				rotBrazoI += rotBrazoIOffset * deltaTime;
+			else if (rotBrazoI > -50.0f && BanRegreso2 == true)
+				rotBrazoI -= rotBrazoIOffset * deltaTime;
+			else {
+				BanRegreso2 = !BanRegreso2;
+			}
+		}
+
+		// Animacion Toroide
+		if (mainWindow.getBanOnAnim()) {
+			if (arrastreRio < 5) {
+				arrastreRio += 0.09;
+			}
+			else if (recorrido < 84.5){
+				recorrido += 0.09;
+			}
+			efecto = (0.3 * sin(3.14159 * 13.3 + deltaTime * 3));
+		}
 
 		//Recibir eventos del usuario
 		glfwPollEvents();
-		camera.keyControl(mainWindow.getsKeys(), deltaTime);
-		camera.mouseControl(mainWindow.getXChange(), 0.0f);
+
+		if (mainWindow.getCambioCamara() == false) {
+			animPersonaje = camera.keyControl(mainWindow.getsKeys(), deltaTime);
+			camera.mouseControl(mainWindow.getXChange(), 0.0f);
+		}
+		else {
+			camIso.keyControl2(mainWindow.getsKeys(), deltaTime);
+			camIso.mouseControl(0.0f, 0.0f);
+			//camIso.keyControl(mainWindow.getsKeys(), deltaTime);
+			//camIso.mouseControl(0.0f, 0.0f);
+		}
+		
+		//para keyframes
+		inputKeyframes(mainWindow.getsKeys());
+		animate();
 		//camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
 		//camIso.keyControl(mainWindow.getsKeys(), deltaTime);
 		//camIso.mouseControl(0.0f, 0.0f);
+
 
 		// Clear the window
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -845,11 +1111,21 @@ int main()
 		uniformSpecularIntensity = shaderList[0].GetSpecularIntensityLocation();
 		uniformShininess = shaderList[0].GetShininessLocation();
 
-		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
-		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
+		if (mainWindow.getCambioCamara() == false) {
+			glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
+			glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrixPersonaje()));
+			glUniform3f(uniformEyePosition, camera.getCameraPosition().x, camera.getCameraPosition().y, camera.getCameraPosition().z);
+		}
+		else {
+			glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
+			glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camIso.calculateViewMatrix()));
+			glUniform3f(uniformEyePosition, camIso.getCameraPosition().x, camIso.getCameraPosition().y, camIso.getCameraPosition().z);
+		}
 		//glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camIso.calculateViewMatrix()));
-		glUniform3f(uniformEyePosition, camera.getCameraPosition().x, camera.getCameraPosition().y, camera.getCameraPosition().z);
+		//glUniform3f(uniformEyePosition, camera.getCameraPosition().x, camera.getCameraPosition().y, camera.getCameraPosition().z);
 		//glUniform3f(uniformEyePosition, camIso.getCameraPosition().x, camIso.getCameraPosition().y, camIso.getCameraPosition().z);
+
+
 
 
 		//información al shader de fuentes de iluminación
@@ -878,6 +1154,56 @@ int main()
 
 		engine->setListenerPosition(position, lookDirection, velPerSecond, upVector);
 
+		//Lógica de audio0
+		if (soundtrack) {
+			if (soundtrack->getVolume() > 0.025f || soundtrack->getVolume() < -0.001f)
+				soundtrack->setVolume(soundtrack->getVolume() - soundtrack->getVolume());
+
+			if (temploAvatar->getIsPaused() && flautasAvatarB->getIsPaused() && molino_sound->getIsPaused()) {
+				if (soundtrack->getVolume() <= 0.015f)
+					soundtrack->setVolume(soundtrack->getVolume() + 0.0005f * deltaTime);
+			}
+			else {
+				if (soundtrack->getVolume() >= 0.0f)
+					soundtrack->setVolume(soundtrack->getVolume() - 0.0005f * deltaTime);
+			}
+		}
+		
+		//Lógica de audio1
+		if (temploAvatar) {
+			poss = temploAvatar->getPosition();
+			dist = sqrt(pow(poss.X - positionL.x, 2) + pow(poss.Y - positionL.y, 2) + pow(poss.Z - positionL.z, 2));
+			if (dist > 60) {
+				temploAvatar->setIsPaused(true);
+			}
+			else {
+				temploAvatar->setIsPaused(false);
+			}
+		}
+
+		//Lógica de audio2
+		if (flautasAvatarB) {
+			poss = flautasAvatarB->getPosition();
+			dist = sqrt(pow(poss.X - positionL.x, 2) + pow(poss.Y - positionL.y, 2) + pow(poss.Z - positionL.z, 2));
+			if (dist > 60) {
+				flautasAvatarB->setIsPaused(true);
+			}
+			else {
+				flautasAvatarB->setIsPaused(false);
+			}
+		}
+		
+		//Lógica de audio3
+		if (molino_sound) {
+			poss = molino_sound->getPosition();
+			dist = sqrt(pow(poss.X - positionL.x, 2) + pow(poss.Y - positionL.y, 2) + pow(poss.Z - positionL.z, 2));
+			if (dist > 60) {
+				molino_sound->setIsPaused(true);
+			}
+			else {
+				molino_sound->setIsPaused(false);
+			}
+		}
 		//############
 		//##  Piso  ##
 		//############
@@ -898,13 +1224,13 @@ int main()
 		//### Creacion del toroide ###
 		//############################
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(32.0f, 0.3f, -51.0f));
+		model = glm::translate(model, glm::vec3(32.0f+arrastreRio+efecto, 0.3f+efecto, -51.0f+recorrido));
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		toroideTexture.UseTexture();
-		meshList[5]->RenderMesh();
+		meshList[6]->RenderMesh();
 		
 		//Arboles
 		model = glm::mat4(1.0);
@@ -912,7 +1238,7 @@ int main()
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		//model = glm::rotate(model, 180 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//Arboles.RenderModel();
+		Arboles.RenderModel();
 
 		//Arboles
 		model = glm::mat4(1.0);
@@ -928,7 +1254,7 @@ int main()
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//Arboles.RenderModel();
+		Arboles.RenderModel();
 
 		//Arboles
 		model = glm::mat4(1.0);
@@ -971,20 +1297,86 @@ int main()
 		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		LamparaFarola.RenderModel();
-		
 
-		//##########################//
-		//####	  Mordecai      ####//
-		//##########################//
+		
+		//**************
+		//Columpio//
+		//*************
+
+		//Arbol colinpio
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-10.0f, 0.0f, -65.0f));
-		
-		model = glm::scale(model, glm::vec3(1.25f, 1.25f, 1.25f));
-		//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(-55.0f, 0.0f, 90.0f));
+		//model = glm::scale(model, glm::vec3(2.0f, 5.0f, 2.0f));
+		model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Personaje2.RenderModel();
+		Arbol_col.RenderModel();
 
-		
+
+		//Arbol colinpio
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-70.0f, 0.0f, 70.0f));
+		//model = glm::scale(model, glm::vec3(2.0f, 5.0f, 2.0f));
+		model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Arbol_col.RenderModel();
+
+		//Arbol colinpio
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-85.0f, 0.0f, 90.0f));
+		//model = glm::scale(model, glm::vec3(2.0f, 5.0f, 2.0f));
+		model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Arbol_col.RenderModel();
+
+
+		//Arbol colinpio
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-100.0f, 0.0f, 70.0f));
+		//model = glm::scale(model, glm::vec3(2.0f, 5.0f, 2.0f));
+		model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Arbol_col.RenderModel();
+
+		//Arbol colinpio
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-115.0f, 0.0f, 90.0f));
+		//model = glm::scale(model, glm::vec3(2.0f, 5.0f, 2.0f));
+		model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Arbol_col.RenderModel();
+
+
+		//Arbol colinpio
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-60.0f, 0.0f, 70.0f));
+		//model = glm::scale(model, glm::vec3(2.0f, 5.0f, 2.0f));
+		model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Arbol_col.RenderModel();
+
+
+
+
+
+		//Arbol colinpio
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-40.0f, 0.0f, 70.0f));
+		//model = glm::scale(model, glm::vec3(2.0f, 5.0f, 2.0f));
+		model = glm::rotate(model, -45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Arbol_col.RenderModel();
+
+		//columpio
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-43.5f, 11.0f, 70.0f));
+		model = glm::scale(model, glm::vec3(0.75f, 1.5f, 1.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, rotColumpio * toRadians, glm::vec3(0.0f, 0.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Columpio.RenderModel();
+
+
+
 		//##########################//
 		//####  Base Meditacion ####//
 		//##########################//
@@ -1723,9 +2115,9 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Banca.RenderModel();
 
-		//##########################//
-		//#### Greg - Personaje Principal ####//
-		//##########################//
+		//#####################################//
+		//#### Greg - Personaje Principal #####//
+		//#####################################//
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-60.0f, 0.0f, 55.0f));
 		model = glm::scale(model, glm::vec3(0.7f, 0.7f, 0.7f));
@@ -1812,13 +2204,109 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		LinternaLenador.RenderModel();
 
+		//##########################//
+		//####    Mordecai      ####//
+		//##########################//
 
+		//Cuerpo
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-10.0f, 0.0f, -65.0f));
+		model = glm::scale(model, glm::vec3(4.5f, 4.5f, 4.5f));
+		modelaux = model;
+		//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		MordecaiCuerpo.RenderModel();
+		
+		//Brazo izquierdo
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(0.035f, 1.134f, -0.038f));
+		model = glm::rotate(model, -90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, rotBrazoI * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		MordecaiBrazoIzq.RenderModel();
+
+		//Brazo derecho
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-0.124f, 1.148f, -0.044f));
+		model = glm::rotate(model, -90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, rotBrazoD * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		MordecaiBrazoDer.RenderModel();
+		
+		//#################
+		//###  Estatuas ###		
+		//#################
+		
+		//Estatua 1
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-60.0f, 10.5f, -15.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(10.0f, 0.0f, 17.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 
 		//blending: transparencia o traslucidez
 		glEnable(GL_BLEND);//Para indicar trasparencia y traslucidez
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);//Va antes de la textura
+		estatua1Texture.UseTexture();
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		meshList[5]->RenderMesh();
+
+
+		//Estatua 2
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-30.0f, 10.5f, -15.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(10.0f, 0.0f, 17.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		estatua2Texture.UseTexture();
+		meshList[5]->RenderMesh();
+
+		//Estatua 3
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-60.0f, 10.5f, 15.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(10.0f, 0.0f, 17.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		estatua3Texture.UseTexture();
+		meshList[5]->RenderMesh();
+
+		//Estatua 4
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-30.0f, 10.5f, 15.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(10.0f, 0.0f, 17.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		estatua4Texture.UseTexture();
+		meshList[5]->RenderMesh();
 
 		//textura con movimiento del humo
+		//toffsetu += 0.001 * deltaTime;
+		//toffsetv += 0.0 * deltaTime;
+		//if (toffsetu > 1.0)
+		//	toffsetu = 0.0;
+		//toffset = glm::vec2(toffsetu, toffsetv);
+
+		//model = glm::mat4(1.0);
+		//model = glm::translate(model, glm::vec3(-21.972f, 28.592f, 3.27f));
+		//model = glm::rotate(model, -90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		//model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		//model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
+		//glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
+		//glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		////humo.UseTexture();
+		//Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		////meshList[4]->RenderMesh();
+
+		//model = glm::mat4(1.0);
+		//model = glm::translate(model, glm::vec3(-24.772f, 31.392f, 3.27f));
+		//model = glm::rotate(model, -90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		//model = glm::rotate(model, 45 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		//model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
+		//glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
+		//glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		////humo.UseTexture();
+		////meshList[4]->RenderMesh();
+		//textura con movimiento
 		toffsetu += (0.0005 * sin(-3.14159 * 1.7 + deltaTime * 3));
 		toffsetv += 0.0005 * deltaTime;
 		if (toffsetu > 1.0)
@@ -1843,8 +2331,45 @@ int main()
 		mainWindow.swapBuffers();
 	}
 
+	engine->drop(); //Eliminar audios
 	return 0;
 }
+
+void inputKeyframes(bool* keys)
+{
+	if (keys[GLFW_KEY_SPACE])
+	{
+		if (reproduciranimacion < 1)
+		{
+			if (play == false && (FrameIndex > 1))
+			{
+				resetElements();
+				//First Interpolation				
+				interpolation();
+				play = true;
+				playIndex = 0;
+				i_curr_steps = 0;
+				reproduciranimacion++;
+				printf("\n *--- Presiona R para habilitar reproducir de nuevo la animación ---*\n");
+				habilitaranimacion = 0;
+
+			}
+			else
+			{
+				play = false;
+			}
+		}
+	}
+	if (keys[GLFW_KEY_R])
+	{
+		if (habilitaranimacion < 1)
+		{
+			reproduciranimacion = 0;
+		}
+	}
+}
+
+//Fin
 
 
 

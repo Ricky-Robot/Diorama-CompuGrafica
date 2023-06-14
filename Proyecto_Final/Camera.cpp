@@ -44,6 +44,34 @@ bool Camera::keyControl(bool* keys, GLfloat deltaTime)
 	return false;
 }
 
+bool Camera::keyControlPersonaje(bool* keys, GLfloat deltaTime)
+{
+	GLfloat velocity = moveSpeed * deltaTime;
+
+	if (keys[GLFW_KEY_W])
+	{
+		position -= perimetro * velocity;
+		return true;
+	}
+
+	if (keys[GLFW_KEY_S])
+	{
+		position += perimetro * velocity;
+	}
+
+	if (keys[GLFW_KEY_A])
+	{
+		position += glm::normalize(glm::cross(perimetro, worldUp)) * velocity;
+	}
+
+	if (keys[GLFW_KEY_D])
+	{
+		position -= glm::normalize(glm::cross(perimetro, worldUp)) * velocity;
+	}
+
+	return false;
+}
+
 void Camera::mouseControl(GLfloat xChange, GLfloat yChange)
 {
 	xChange *= turnSpeed;
@@ -64,10 +92,35 @@ void Camera::mouseControl(GLfloat xChange, GLfloat yChange)
 
 	update();
 }
+void Camera::mouseControlPersonaje(GLfloat xChange, GLfloat yChange)
+{
+	xChange *= turnSpeed;
+	yChange *= turnSpeed;
+
+	yaw += xChange;
+	pitch += yChange;
+
+	if (pitch > 89.0f)
+	{
+		pitch = 89.0f;
+	}
+
+	if (pitch < -89.0f)
+	{
+		pitch = -89.0f;
+	}
+
+	update2();
+}
 
 glm::mat4 Camera::calculateViewMatrix()
 {
 	return glm::lookAt(position, position + front, up);
+}
+
+glm::mat4 Camera::calculateViewMatrixPersonaje()
+{
+	return glm::lookAt(position + perimetro * glm::vec3(10.0f, 10.0f, 10.0f), position, up);
 }
 
 glm::vec3 Camera::getCameraPosition()
@@ -79,6 +132,23 @@ glm::vec3 Camera::getCameraPosition()
 glm::vec3 Camera::getCameraDirection()
 {
 	return glm::normalize(front);
+}
+
+glm::vec3 Camera::getPosicionNueva()
+{
+	return position + perimetro * glm::vec3(10.0f, 10.0f, 10.0f);
+}
+
+
+void Camera::update2()
+{
+	rotacionCamara = yaw;
+	perimetro.x = cos(glm::radians(yaw));
+	perimetro.y = 0.0f;
+	perimetro.z = sin(glm::radians(yaw));
+	perimetro = glm::normalize(perimetro);
+
+	up = glm::vec3(0.0f, 1.0f, 0.0f);
 }
 
 void Camera::update()

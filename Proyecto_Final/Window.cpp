@@ -21,6 +21,8 @@ Window::Window(GLint windowWidth, GLint windowHeight)
 	BanOnAnim = false;
 	Imp = false;
 	luz = false;
+	cambioCamara = false;
+
 	for (size_t i = 0; i < 1024; i++)
 	{
 		keys[i] = 0;
@@ -163,11 +165,15 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 		theWindow->escale -= 1.0;
 	}
 
-	
-
-	
-
-
+	//Cambio de camara
+	if (key == GLFW_KEY_M) // 2da persona
+	{
+		theWindow->cambioCamara = false;
+	}
+	if (key == GLFW_KEY_N) //Isométrica
+	{
+		theWindow->cambioCamara = true;
+	}
 
 
 	if (key >= 0 && key < 1024)
