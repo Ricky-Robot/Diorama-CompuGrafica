@@ -83,8 +83,9 @@ float rotColumpioOffset, rotSyBOffset;
 bool BanColumpio, BanSyB;
 float incRot;
 
-float rotBrazos = 0;
-bool dirBrazos = false;
+float rotBrazoIzqPiernaDer = 0;
+float rotBrazoDerPiernaIzq = 0;
+bool dirBrazosPiernas = false;
 
 //key frames
 float levAang;
@@ -92,6 +93,8 @@ float levRocs, inclRocs, giroRocs;
 float levEst;
 
 float rotMolino = 0;
+
+bool animPersonaje;
 
 //Banderas
 int bandia = 0;
@@ -135,6 +138,9 @@ Model Tronco;
 Model GregCuerpo;
 Model GregBrazoIzq;
 Model GregBrazoDer;
+Model GregPiernaIzq;
+Model GregPiernaDer;
+
 Model Rio;
 Model ViejoMolino;
 Model MolinoAgua;
@@ -379,7 +385,7 @@ int main()
 	CreateToroide();
 	CreateShaders();
 
-	camera = Camera(glm::vec3(-120.0f, 4.0f, 100.0f), glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, 0.0f, 0.5f, 0.5f);//Ligada al planoXZ
+	camera = Camera(glm::vec3(-120.0f, 4.0f, 80.0f), glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, 0.0f, 0.2f, 0.2f);//Ligada al planoXZ
 	//camIso = Camera(glm::vec3(-150.0f, 150.0f, 150.0f), glm::vec3(0.0f, 1.0f, 0.0f), -45.0f, -45.0f, 0.5f, 0.5f);//Isometrica
 	
 	//Original
@@ -472,12 +478,19 @@ int main()
 	LamparaFarola.LoadModel("Models/lampara.obj");
 	luciernaga = Model();
 	luciernaga.LoadModel("Models/Luciernaga.obj");
+
 	GregCuerpo = Model();
-	GregCuerpo.LoadModel("Models/GregCuerpoTemp.obj");
+	GregCuerpo.LoadModel("Models/GregCuerpo.obj");
 	GregBrazoIzq = Model();
 	GregBrazoIzq.LoadModel("Models/GregBrazoIzq.obj");
 	GregBrazoDer = Model();
 	GregBrazoDer.LoadModel("Models/GregBrazoDer.obj");
+	GregPiernaIzq = Model();
+	GregPiernaIzq.LoadModel("Models/GregPiernaIzq.obj");
+	GregPiernaDer = Model();
+	GregPiernaDer.LoadModel("Models/GregPiernaDer.obj");
+
+
 	Rio = Model();
 	Rio.LoadModel("Models/rio.obj");
 	ViejoMolino = Model();
@@ -800,7 +813,7 @@ int main()
 
 		//Recibir eventos del usuario
 		glfwPollEvents();
-		camera.keyControl(mainWindow.getsKeys(), deltaTime);
+		animPersonaje = camera.keyControl(mainWindow.getsKeys(), deltaTime);
 		camera.mouseControl(mainWindow.getXChange(), 0.0f);
 		//camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
 		//camIso.keyControl(mainWindow.getsKeys(), deltaTime);
@@ -1727,44 +1740,58 @@ int main()
 		//#### Greg - Personaje Principal ####//
 		//##########################//
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-60.0f, 0.0f, 55.0f));
+		model = glm::translate(model, glm::vec3(camera.getCameraPosition().x, 2.2f, 9.0f + camera.getCameraPosition().z));
 		model = glm::scale(model, glm::vec3(0.7f, 0.7f, 0.7f));
-		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		GregCuerpo.RenderModel();
 
-		if (!dirBrazos) {
-			rotBrazos += 0.1;
-			if (rotBrazos > 70) {
-				dirBrazos = !dirBrazos;
+		if (animPersonaje) {
+			if (!dirBrazosPiernas) {
+				rotBrazoDerPiernaIzq += 2.0;
+				rotBrazoIzqPiernaDer -= 2.0;
 
+				if (rotBrazoDerPiernaIzq > 60) {
+					dirBrazosPiernas = !dirBrazosPiernas;
+				}
 			}
-		}
-		else if (dirBrazos){
-			rotBrazos -= 0.1;
+			else if (dirBrazosPiernas) {
+				rotBrazoDerPiernaIzq -= 2.0;
+				rotBrazoIzqPiernaDer += 2.0;
 
-			if (rotBrazos < 0) {
-				dirBrazos = !dirBrazos;
+				if (rotBrazoDerPiernaIzq < -60) {
+					dirBrazosPiernas = !dirBrazosPiernas;
+				}
 			}
 		}
 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-60.608f, 2.778f, 55.0f));
-		model = glm::rotate(model, rotBrazos * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
-
-
+		model = glm::translate(model, glm::vec3(-0.35f + camera.getCameraPosition().x, 1.8f, 8.91f + camera.getCameraPosition().z));
 		model = glm::scale(model, glm::vec3(0.7f, 0.7f, 0.7f));
-		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, rotBrazoDerPiernaIzq * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		GregBrazoDer.RenderModel();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(0.35f + camera.getCameraPosition().x, 1.8f, 8.91f + camera.getCameraPosition().z));
+		model = glm::scale(model, glm::vec3(0.7f, 0.7f, 0.7f));
+		model = glm::rotate(model, rotBrazoIzqPiernaDer * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		GregBrazoIzq.RenderModel();
 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-60.0f, 0.0f, 55.0f));
+		model = glm::translate(model, glm::vec3(0.387f + camera.getCameraPosition().x, 0.7f, 9.128f + camera.getCameraPosition().z));
 		model = glm::scale(model, glm::vec3(0.7f, 0.7f, 0.7f));
-		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::rotate(model, rotBrazos * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, rotBrazoDerPiernaIzq * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		GregBrazoDer.RenderModel();
+		GregPiernaIzq.RenderModel();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-0.387f + camera.getCameraPosition().x, 0.7f, 9.128f + camera.getCameraPosition().z));
+		model = glm::scale(model, glm::vec3(0.7f, 0.7f, 0.7f));
+		model = glm::rotate(model, rotBrazoIzqPiernaDer * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		GregPiernaDer.RenderModel();
+
 
 
 		//##########################//

@@ -8,7 +8,7 @@ Camera::Camera(glm::vec3 startPosition, glm::vec3 startUp, GLfloat startYaw, GLf
 	worldUp = startUp;
 	yaw = startYaw;
 	pitch = startPitch;
-	front = glm::vec3(0.0f, 0.0f, 0.0f);
+	front = glm::vec3(0.0f, 0.0f, -1.0f);
 
 	moveSpeed = startMoveSpeed;
 	turnSpeed = startTurnSpeed;
@@ -16,13 +16,14 @@ Camera::Camera(glm::vec3 startPosition, glm::vec3 startUp, GLfloat startYaw, GLf
 	update();
 }
 
-void Camera::keyControl(bool* keys, GLfloat deltaTime)
+bool Camera::keyControl(bool* keys, GLfloat deltaTime)
 {
 	GLfloat velocity = moveSpeed * deltaTime;
 
 	if (keys[GLFW_KEY_W])
 	{
 		position += front * velocity;
+		return true;
 	}
 
 	if (keys[GLFW_KEY_S])
@@ -39,6 +40,8 @@ void Camera::keyControl(bool* keys, GLfloat deltaTime)
 	{
 		position += right * velocity;
 	}
+
+	return false;
 }
 
 void Camera::mouseControl(GLfloat xChange, GLfloat yChange)
