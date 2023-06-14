@@ -42,11 +42,8 @@ Semestre 2023-2
 //Implementación del audio
 #include "irrKlang.h"
 
-
-
 const float toRadians = 3.14159265f / 180.0f;
-
-
+const float PI = 3.14159265f;
 
 //variables para animación
 float toffsetu;
@@ -98,7 +95,7 @@ Camera camIso;
 Texture plainTexture;
 Texture pisoTexture;
 Texture AgaveTexture;
-Texture humo;
+Texture toroideTexture;
 
 
 
@@ -269,6 +266,75 @@ void CreateObjects()
 
 }
 
+void CreateToroide() {
+
+	const int numSegments = 36;  // Número de segmentos alrededor del toroide
+	const int numSlices = 18;    // Número de segmentos a lo largo del toroide
+	const float majorRadius = 1.0f;  // Radio mayor del toroide (desde el centro al exterior)
+	const float minorRadius = 0.3f;  // Radio menor del toroide (tamaño del tubo)
+
+	float vertices[(numSlices + 1) * (numSegments + 1) * 8];  // x, y, z, u, v, nx, ny, nz
+	unsigned int indices[numSlices * numSegments * 6];
+
+	int vertexIndex = 0;
+	int index = 0;
+
+	for (int i = 0; i <= numSlices; ++i) {
+		float sliceAngle = 2.0f * PI * i / numSlices;
+		float sliceCos = cos(sliceAngle);
+		float sliceSin = sin(sliceAngle);
+
+		for (int j = 0; j <= numSegments; ++j) {
+			float segmentAngle = 2.0f * PI * j / numSegments;
+			float segmentCos = cos(segmentAngle);
+			float segmentSin = sin(segmentAngle);
+
+			// Posiciones del vértice
+			float x = (majorRadius + minorRadius * segmentCos) * sliceCos;
+			float y = (majorRadius + minorRadius * segmentCos) * sliceSin;
+			float z = minorRadius * segmentSin;
+
+			// Coordenadas de textura (opcional)
+			float u = static_cast<float>(j) / numSegments;
+			float v = static_cast<float>(i) / numSlices;
+
+			// Normales (en este caso, las mismas que las posiciones)
+			float nx = x;
+			float ny = y;
+			float nz = z;
+
+			// Agregar vértice al arreglo
+			vertices[vertexIndex++] = x;
+			vertices[vertexIndex++] = y;
+			vertices[vertexIndex++] = z;
+			vertices[vertexIndex++] = u;
+			vertices[vertexIndex++] = v;
+			vertices[vertexIndex++] = -nx;
+			vertices[vertexIndex++] = -ny;
+			vertices[vertexIndex++] = -nz;
+
+			if (i < numSlices && j < numSegments) {
+				int currRow = i * (numSegments + 1);
+				int nextRow = (i + 1) * (numSegments + 1);
+
+				// Primer triángulo
+				indices[index++] = currRow + j;
+				indices[index++] = nextRow + j;
+				indices[index++] = currRow + j + 1;
+
+				// Segundo triángulo
+				indices[index++] = currRow + j + 1;
+				indices[index++] = nextRow + j;
+				indices[index++] = nextRow + j + 1;
+			}
+		}
+	}
+	//se genera el mesh del Toroide
+
+	Mesh* toroide = new Mesh();
+	toroide->CreateMesh(vertices, indices, (numSlices + 1) * (numSegments + 1) * 8, numSlices * numSegments * 6);
+	meshList.push_back(toroide);
+}
 
 void CreateShaders()
 {
@@ -286,6 +352,7 @@ int main()
 
 	
 	CreateObjects();
+	CreateToroide();
 	CreateShaders();
 
 	camera = Camera(glm::vec3(-60.0f, 5.0f, 50.0f), glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, 0.0f, 0.5f, 0.5f);//Ligada al planoXZ
@@ -300,8 +367,8 @@ int main()
 	pisoTexture.LoadTextureA();
 	AgaveTexture = Texture("Textures/Agave.tga");
 	AgaveTexture.LoadTextureA();
-	humo = Texture("Textures/humo.tga");
-	humo.LoadTextureA();
+	toroideTexture = Texture("Textures/toroide.jpg");
+	toroideTexture.LoadTextureA();
 
 
 	//Pueblo = Model();
@@ -762,6 +829,17 @@ int main()
 
 		//Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		
+		//############################
+		//### Creacion del toroide ###
+		//############################
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-20.0f, 5.0f, 30.0f));
+		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		toroideTexture.UseTexture();
+		meshList[5]->RenderMesh();
+
+
 		//Arboles
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-115.0f, 0.0f, 0.0f));
@@ -1597,9 +1675,9 @@ int main()
 		model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
 		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		humo.UseTexture();
-		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		meshList[4]->RenderMesh();
+		//humo.UseTexture();
+		//Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		//meshList[4]->RenderMesh();
 
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-24.772f, 31.392f, 3.27f));
@@ -1608,8 +1686,8 @@ int main()
 		model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
 		glUniform2fv(uniformTextureOffset, 1, glm::value_ptr(toffset));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		humo.UseTexture();
-		meshList[4]->RenderMesh();
+		//humo.UseTexture();
+		//meshList[4]->RenderMesh();
 
 		glDisable(GL_BLEND);//Desactiva el blender
 
@@ -1618,6 +1696,7 @@ int main()
 		mainWindow.swapBuffers();
 	}
 
+	engine->drop(); //Eliminar audios
 	return 0;
 }
 
